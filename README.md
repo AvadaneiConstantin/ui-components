@@ -293,7 +293,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Frontend Developer** specializing in modern web technologies and component-based architecture. Passionate about creating reusable, performant, and accessible UI components that enhance user experience.
+**Frontend Developer** Modern web technologies and component-based architecture. Passionate about creating reusable, performant, and accessible UI components that enhance user experience.
 
 ---
 
