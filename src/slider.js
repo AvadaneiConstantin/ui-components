@@ -52,6 +52,7 @@ function loadCategory(category) {
 }
 
 // Load component
+// Load component
 async function loadComponent(index) {
   const categoryComponents = components[currentCategory];
   if (!categoryComponents || index < 0 || index >= categoryComponents.length)
@@ -60,36 +61,65 @@ async function loadComponent(index) {
   currentIndex = index;
   const component = categoryComponents[index];
 
-  // Show loading
+  // Reset UI state
   loadingOverlay.classList.remove("hidden");
   slidePlaceholder.classList.add("hidden");
   componentFrame.classList.add("hidden");
-
-  // Update title
   componentTitle.textContent = component.name;
 
-  // Load iframe
-  componentFrame.src = component.path;
+  try {
+    // 1. Descarcă conținutul fișierului ca text
+    const response = await fetch(component.path);
 
-  // Wait for iframe to load
-  componentFrame.onload = function () {
-    loadingOverlay.classList.add("hidden");
-    componentFrame.classList.remove("hidden");
+    if (!response.ok) throw new Error("404 Not Found");
 
-    // Inject dark mode class into iframe
-    try {
-      const iframeDoc =
-        componentFrame.contentDocument || componentFrame.contentWindow.document;
-      if (document.documentElement.classList.contains("dark")) {
-        iframeDoc.documentElement.classList.add("dark");
-      }
-    } catch (e) {
-      // Cross-origin restriction
+    const htmlContent = await response.text();
+
+    // 2. VERIFICARE CRITICĂ:
+    // Dacă fișierul descărcat conține titlul paginii tale principale,
+    // înseamnă că serverul face redirect la index.html în loc de 404.
+    if (htmlContent.includes("<title>UI Components Showcase</title>")) {
+      throw new Error("Component file missing (Redirected to index)");
     }
+
+    // 3. Dacă e valid, setăm sursa iframe-ului
+    componentFrame.src = component.path;
+
+    componentFrame.onload = function () {
+      loadingOverlay.classList.add("hidden");
+      componentFrame.classList.remove("hidden");
+
+      // Sync theme
+      try {
+        const iframeDoc =
+          componentFrame.contentDocument ||
+          componentFrame.contentWindow.document;
+        if (document.documentElement.classList.contains("dark")) {
+          iframeDoc.documentElement.classList.add("dark");
+        }
+      } catch (e) {
+        console.debug("Theme sync failed (cross-origin)");
+      }
+
+      updateButtons();
+      updateBullets();
+    };
+  } catch (error) {
+    console.warn("Slider Error:", error.message);
+    loadingOverlay.classList.add("hidden");
+
+    // Afișăm mesajul de eroare în UI-ul tău existent
+    showPlaceholder(`
+      <div class="text-red-500 text-center">
+        <i class="fas fa-exclamation-circle text-4xl mb-2"></i>
+        <p class="font-bold">Component Not Found</p>
+        <p class="text-xs opacity-70">${component.path}</p>
+      </div>
+    `);
 
     updateButtons();
     updateBullets();
-  };
+  }
 }
 
 // Update bullets

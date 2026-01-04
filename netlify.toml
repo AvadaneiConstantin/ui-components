@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Important pentru iframe-uri!
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOW-FROM https://*.netlify.app"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.netlify.app;"
