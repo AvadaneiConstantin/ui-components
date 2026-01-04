@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Reviews | ProfiStack</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .review-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .review-card:hover {
+        transform: translateY(-5px);
+      }
+      /* Custom scrollbar for dark mode */
+      .dark ::-webkit-scrollbar {
+        width: 8px;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #1f2937;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 10px;
+      }
+
+      .modal-animate-in {
+        animation: modalFadeIn 0.3s ease-out forwards;
+      }
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen font-sans"
+  >
+    <section
+      class="max-w-7xl mx-auto px-4 py-16"
+      aria-labelledby="review-title"
+    >
+      <div class="flex flex-col items-center text-center mb-16">
+        <h2
+          id="review-title"
+          class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6"
+        >
+          Community Feedback
+        </h2>
+
+        <div
+          class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row items-center gap-8"
+        >
+          <div class="flex items-center gap-4">
+            <span class="text-5xl font-black text-gray-900 dark:text-white"
+              >4.8</span
+            >
+            <div class="flex flex-col items-start">
+              <div class="flex text-yellow-400 gap-1 mb-1">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-sm text-gray-500 dark:text-gray-400 font-medium"
+                >1,240 Total Reviews</span
+              >
+            </div>
+          </div>
+          <div
+            class="h-10 w-[1px] bg-gray-200 dark:bg-gray-700 hidden md:block"
+          ></div>
+          <button
+            id="openModalBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-blue-600/20"
+          >
+            Write a Review
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="reviewsGrid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <article
+          class="review-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 relative"
+        >
+          <div class="flex text-yellow-400 mb-4 text-sm">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p
+            class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed"
+          >
+            "The integration process was seamless. Our team saw a 40% increase
+            in productivity within the first month."
+          </p>
+          <div
+            class="flex items-center gap-4 border-t dark:border-gray-700 pt-6"
+          >
+            <img
+              src="https://i.pravatar.cc/150?u=1"
+              class="w-12 h-12 rounded-full border-2 border-blue-100 dark:border-gray-600"
+              alt="Sarah Miller"
+            />
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white">
+                Sarah Miller
+              </h4>
+              <p
+                class="text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider"
+              >
+                CTO @ TechFlow
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="review-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 relative"
+        >
+          <div class="flex text-yellow-400 mb-4 text-sm">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="far fa-star text-gray-300"></i>
+          </div>
+          <p
+            class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed"
+          >
+            "Highly responsive customer support. They guided us through every
+            complex configuration step with patience."
+          </p>
+          <div
+            class="flex items-center gap-4 border-t dark:border-gray-700 pt-6"
+          >
+            <img
+              src="https://i.pravatar.cc/150?u=2"
+              class="w-12 h-12 rounded-full border-2 border-blue-100 dark:border-gray-600"
+              alt="David Chen"
+            />
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white">
+                David Chen
+              </h4>
+              <p
+                class="text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider"
+              >
+                Operations Lead
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="review-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 relative"
+        >
+          <div class="flex text-yellow-400 mb-4 text-sm">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p
+            class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed"
+          >
+            "Best-in-class UI/UX. My clients love the dashboard clarity. It’s
+            rare to find tools this powerful yet simple."
+          </p>
+          <div
+            class="flex items-center gap-4 border-t dark:border-gray-700 pt-6"
+          >
+            <img
+              src="https://i.pravatar.cc/150?u=3"
+              class="w-12 h-12 rounded-full border-2 border-blue-100 dark:border-gray-600"
+              alt="Elena Rodriguez"
+            />
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white">
+                Elena Rodriguez
+              </h4>
+              <p
+                class="text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider"
+              >
+                Freelance Designer
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="flex justify-center items-center gap-3 mt-16" id="pagination">
+        <button
+          data-page="1"
+          class="w-10 h-1 bg-blue-600 rounded-full transition-all"
+        ></button>
+        <button
+          data-page="2"
+          class="w-6 h-1 bg-gray-300 dark:bg-gray-700 rounded-full hover:bg-blue-400 transition-all"
+        ></button>
+        <button
+          data-page="3"
+          class="w-6 h-1 bg-gray-300 dark:bg-gray-700 rounded-full hover:bg-blue-400 transition-all"
+        ></button>
+      </div>
+    </section>
+
+    <div
+      id="modalOverlay"
+      class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4"
+    >
+      <div
+        id="modalContent"
+        class="bg-white dark:bg-gray-800 w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden hidden modal-animate-in"
+      >
+        <div class="p-8">
+          <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Submit Feedback
+            </h3>
+            <button
+              id="closeModalBtn"
+              class="text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors"
+            >
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+
+          <form id="reviewForm" class="space-y-6">
+            <div
+              class="space-y-3 text-center py-4 bg-slate-50 dark:bg-gray-900/50 rounded-2xl"
+            >
+              <label
+                class="block text-sm font-bold text-gray-500 uppercase tracking-widest"
+                >Your Satisfaction</label
+              >
+              <div
+                id="starInputGroup"
+                class="flex justify-center gap-2 text-3xl"
+              >
+                <button
+                  type="button"
+                  data-val="1"
+                  class="star-btn text-gray-300 hover:scale-110 transition-transform"
+                >
+                  <i class="fas fa-star"></i>
+                </button>
+                <button
+                  type="button"
+                  data-val="2"
+                  class="star-btn text-gray-300 hover:scale-110 transition-transform"
+                >
+                  <i class="fas fa-star"></i>
+                </button>
+                <button
+                  type="button"
+                  data-val="3"
+                  class="star-btn text-gray-300 hover:scale-110 transition-transform"
+                >
+                  <i class="fas fa-star"></i>
+                </button>
+                <button
+                  type="button"
+                  data-val="4"
+                  class="star-btn text-gray-300 hover:scale-110 transition-transform"
+                >
+                  <i class="fas fa-star"></i>
+                </button>
+                <button
+                  type="button"
+                  data-val="5"
+                  class="star-btn text-gray-300 hover:scale-110 transition-transform"
+                >
+                  <i class="fas fa-star"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <input
+                type="text"
+                placeholder="Full Name"
+                required
+                class="w-full bg-gray-100 dark:bg-gray-700 border-none rounded-xl p-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 transition-all outline-none"
+              />
+              <textarea
+                rows="4"
+                placeholder="How has your experience been?"
+                required
+                class="w-full bg-gray-100 dark:bg-gray-700 border-none rounded-xl p-4 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 transition-all outline-none resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-xl shadow-blue-600/20 transition-all active:scale-95"
+            >
+              Post My Review
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modalOverlay = document.getElementById("modalOverlay");
+        const modalContent = document.getElementById("modalContent");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const starBtns = document.querySelectorAll(".star-btn");
+        const reviewForm = document.getElementById("reviewForm");
+        let currentRating = 0;
+
+        // Modal Logic
+        const toggleModal = (show) => {
+          if (show) {
+            modalOverlay.classList.replace("hidden", "flex");
+            modalContent.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+          } else {
+            modalOverlay.classList.replace("flex", "hidden");
+            modalContent.classList.add("hidden");
+            document.body.style.overflow = "";
+            resetForm();
+          }
+        };
+
+        openModalBtn.addEventListener("click", () => toggleModal(true));
+        closeModalBtn.addEventListener("click", () => toggleModal(false));
+        modalOverlay.addEventListener("click", (e) => {
+          if (e.target === modalOverlay) toggleModal(false);
+        });
+
+        // Star Selection Logic
+        starBtns.forEach((btn, idx) => {
+          btn.addEventListener("click", () => {
+            currentRating = parseInt(btn.dataset.val);
+            updateStars(currentRating);
+          });
+
+          // Hover preview
+          btn.addEventListener("mouseenter", () =>
+            updateStars(parseInt(btn.dataset.val), true)
+          );
+          btn.addEventListener("mouseleave", () => updateStars(currentRating));
+        });
+
+        function updateStars(val, isHover = false) {
+          starBtns.forEach((btn, i) => {
+            if (i < val) {
+              btn.classList.replace("text-gray-300", "text-yellow-400");
+            } else {
+              btn.classList.replace("text-yellow-400", "text-gray-300");
+            }
+          });
+        }
+
+        function resetForm() {
+          reviewForm.reset();
+          currentRating = 0;
+          updateStars(0);
+        }
+
+        // Submit logic
+        reviewForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (currentRating === 0) {
+            alert("Please provide a star rating!");
+            return;
+          }
+
+          const submitBtn = reviewForm.querySelector('button[type="submit"]');
+          submitBtn.innerText = "Publishing...";
+          submitBtn.disabled = true;
+
+          setTimeout(() => {
+            console.log("Review Published:", { rating: currentRating });
+            toggleModal(false);
+            submitBtn.innerText = "Post My Review";
+            submitBtn.disabled = false;
+            alert("Thank you! Your review has been submitted.");
+          }, 1500);
+        });
+
+        // Pagination Demo
+        document.querySelectorAll("#pagination button").forEach((dot) => {
+          dot.addEventListener("click", () => {
+            document.querySelectorAll("#pagination button").forEach((d) => {
+              d.classList.replace("w-10", "w-6");
+              d.classList.replace("bg-blue-600", "bg-gray-300");
+            });
+            dot.classList.replace("w-6", "w-10");
+            dot.classList.replace("bg-gray-300", "bg-blue-600");
+            console.log("Switching to page:", dot.dataset.page);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

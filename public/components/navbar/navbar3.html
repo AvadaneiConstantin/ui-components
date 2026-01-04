@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProfiStack | Fixed Mega Nav</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      /* Desktop Hover Logic */
+      @media (min-width: 768px) {
+        .group:hover .mega-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        /* Keep menu open when moving cursor from button to menu */
+        .mega-menu {
+          transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+        }
+      }
+
+      /* Mobile Accordion Logic */
+      .mobile-submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .mobile-submenu.open {
+        max-height: 500px;
+      }
+
+      .rotate-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .rotated {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <nav
+      class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b dark:border-gray-800"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <a href="#" class="flex items-center gap-2">
+            <div
+              class="w-9 h-9 bg-sky-600 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-cubes text-white"></i>
+            </div>
+            <span class="font-bold text-xl text-gray-900 dark:text-white"
+              >ProfiStack</span
+            >
+          </a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex flex-1 justify-center space-x-2">
+            <!-- Products Dropdown - CENTERED -->
+            <div class="relative group">
+              <button
+                class="px-4 py-2 text-gray-600 dark:text-gray-300 font-medium hover:text-sky-600 flex items-center gap-1 relative"
+              >
+                Products <i class="fas fa-chevron-down text-[10px] mt-0.5"></i>
+              </button>
+
+              <div
+                class="mega-menu absolute left-0 right-0 mx-auto w-48 pt-2 opacity-0 invisible translate-y-2 transition-all duration-200"
+              >
+                <div
+                  class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border dark:border-gray-700 p-2"
+                >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-sky-50 dark:hover:bg-sky-900/30 rounded-lg"
+                    >Analytics</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-sky-50 dark:hover:bg-sky-900/30 rounded-lg"
+                    >Security</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Company Mega Menu - CENTERED -->
+            <div class="relative group">
+              <button
+                class="px-4 py-2 text-gray-600 dark:text-gray-300 font-medium hover:text-sky-600 flex items-center gap-1"
+              >
+                Company <i class="fas fa-chevron-down text-[10px] mt-0.5"></i>
+              </button>
+
+              <div
+                class="mega-menu absolute left-[-200px] top-full w-[600px] pt-2 opacity-0 invisible transition-all duration-200"
+              >
+                <div
+                  class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border dark:border-gray-700 p-8 grid grid-cols-3 gap-8"
+                >
+                  <!-- Column 1: About -->
+                  <div>
+                    <h4
+                      class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4"
+                    >
+                      About
+                    </h4>
+                    <ul class="space-y-3">
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Our Story</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Leadership</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Mission & Values</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Column 2: Careers -->
+                  <div>
+                    <h4
+                      class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4"
+                    >
+                      Careers
+                    </h4>
+                    <ul class="space-y-3">
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Open Positions</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Benefits</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Culture</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Column 3: Support -->
+                  <div>
+                    <h4
+                      class="text-xs font-bold text-sky-600 uppercase tracking-widest mb-4"
+                    >
+                      Support
+                    </h4>
+                    <ul class="space-y-3">
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Help Center</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Documentation</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-600"
+                          >Contact Support</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="#"
+              class="px-4 py-2 text-gray-600 dark:text-gray-300 font-medium hover:text-sky-600 transition-colors"
+              >Pricing</a
+            >
+          </div>
+
+          <!-- Right Side Actions -->
+          <div class="flex items-center gap-3">
+            <button
+              id="themeToggle"
+              class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            >
+              <i class="fas fa-moon dark:hidden"></i>
+              <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+            <a
+              href="#"
+              class="hidden md:block px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-full transition-all active:scale-95 shadow-lg"
+            >
+              Login
+            </a>
+            <button
+              id="mobileMenuBtn"
+              class="md:hidden p-2 text-gray-700 dark:text-white text-2xl"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800"
+      >
+        <div class="p-4 space-y-1">
+          <!-- Products in Mobile -->
+          <div>
+            <button
+              onclick="toggleSubmenu('sub-products', this)"
+              class="w-full flex items-center justify-between p-4 text-gray-700 dark:text-gray-200 font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800"
+            >
+              Products <i class="fas fa-chevron-down text-xs rotate-icon"></i>
+            </button>
+            <div
+              id="sub-products"
+              class="mobile-submenu bg-gray-50/50 dark:bg-gray-800/30 rounded-xl"
+            >
+              <div class="p-4">
+                <a href="#" class="block py-3 text-gray-600 dark:text-gray-400"
+                  >Analytics</a
+                >
+                <a href="#" class="block py-3 text-gray-600 dark:text-gray-400"
+                  >Security</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Company in Mobile -->
+          <div>
+            <button
+              onclick="toggleSubmenu('sub-company', this)"
+              class="w-full flex items-center justify-between p-4 text-gray-700 dark:text-gray-200 font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800"
+            >
+              Company <i class="fas fa-chevron-down text-xs rotate-icon"></i>
+            </button>
+            <div
+              id="sub-company"
+              class="mobile-submenu bg-gray-50/50 dark:bg-gray-800/30 rounded-xl overflow-y-auto"
+            >
+              <div class="p-4 grid grid-cols-1 gap-6">
+                <!-- About Column -->
+                <div>
+                  <p class="text-xs font-bold text-sky-600 uppercase mb-3">
+                    About
+                  </p>
+                  <div class="space-y-2">
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Our Story</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Leadership</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Mission & Values</a
+                    >
+                  </div>
+                </div>
+
+                <!-- Careers Column -->
+                <div>
+                  <p class="text-xs font-bold text-sky-600 uppercase mb-3">
+                    Careers
+                  </p>
+                  <div class="space-y-2">
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Open Positions</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Benefits</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Culture</a
+                    >
+                  </div>
+                </div>
+
+                <!-- Support Column -->
+                <div>
+                  <p class="text-xs font-bold text-sky-600 uppercase mb-3">
+                    Support
+                  </p>
+                  <div class="space-y-2">
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Help Center</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Documentation</a
+                    >
+                    <a
+                      href="#"
+                      class="block py-2 text-gray-600 dark:text-gray-400"
+                      >Contact Support</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Other Mobile Links -->
+          <a
+            href="#"
+            class="block p-4 text-gray-700 dark:text-gray-200 font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800"
+            >Pricing</a
+          >
+
+          <!-- Mobile CTA -->
+          <div class="pt-4 px-4">
+            <button
+              class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md transition-colors"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content to test scrolling -->
+    <div class="max-w-7xl mx-auto p-8">
+      <h1 class="text-4xl font-bold mb-8 dark:text-white">Test Content</h1>
+      <div class="space-y-8">
+        <div class="h-96 bg-gray-200 dark:bg-gray-800 rounded-xl"></div>
+        <div class="h-96 bg-gray-200 dark:bg-gray-800 rounded-xl"></div>
+        <div class="h-96 bg-gray-200 dark:bg-gray-800 rounded-xl"></div>
+      </div>
+    </div>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const themeToggle = document.getElementById("themeToggle");
+
+      // Main Mobile Toggle
+      mobileMenuBtn.addEventListener("click", () => {
+        const isHidden = mobileMenu.classList.toggle("hidden");
+        mobileMenuBtn.innerHTML = isHidden
+          ? '<i class="fas fa-bars"></i>'
+          : '<i class="fas fa-times"></i>';
+        document.body.style.overflow = isHidden ? "" : "hidden";
+      });
+
+      // Submenu Accordion Logic
+      function toggleSubmenu(id, btn) {
+        const submenu = document.getElementById(id);
+        const icon = btn.querySelector(".rotate-icon");
+        submenu.classList.toggle("open");
+        icon.classList.toggle("rotated");
+      }
+
+      // Theme Toggle
+      themeToggle.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+      });
+
+      // Close mobile menu on window resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 768) {
+          mobileMenu.classList.add("hidden");
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          document.body.style.overflow = "";
+        }
+      });
+    </script>
+  </body>
+</html>

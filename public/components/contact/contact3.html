@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Free Consultation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center p-4 transition-colors"
+  >
+    <main
+      class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border dark:border-gray-700"
+    >
+      <header class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+          Free Consultation
+        </h1>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">
+          We'll respond within 24 hours
+        </p>
+      </header>
+
+      <form id="consultationForm" class="space-y-5">
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Full Name *</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="fullName"
+            required
+            placeholder="John Doe"
+            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 outline-none transition-all"
+          />
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Email Address *</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 outline-none transition-all"
+          />
+        </div>
+
+        <div>
+          <label
+            for="project"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Project Type</label
+          >
+          <select
+            id="project"
+            name="projectType"
+            required
+            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 outline-none transition-all cursor-pointer"
+          >
+            <option value="" disabled selected>Select an option</option>
+            <option value="web">Website Development</option>
+            <option value="mobile">Mobile App</option>
+            <option value="design">UI/UX Design</option>
+            <option value="consulting">Consulting</option>
+          </select>
+        </div>
+
+        <div>
+          <label
+            for="message"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Project Details *</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="3"
+            required
+            minlength="10"
+            placeholder="Briefly describe your project..."
+            class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 outline-none resize-none transition-all"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all shadow-md active:scale-95"
+        >
+          Request Consultation
+        </button>
+      </form>
+    </main>
+
+    <div
+      id="modal"
+      class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl max-w-sm w-full text-center"
+      >
+        <div class="text-green-500 text-5xl mb-4">✓</div>
+        <h2 class="text-2xl font-bold dark:text-white mb-2">Request Sent!</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          Check your console to see the FormData output.
+        </p>
+        <button
+          id="closeModal"
+          class="w-full py-2.5 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("consultationForm");
+      const modal = document.getElementById("modal");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // 1. Check native validation (required fields)
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // 2. Extract data using FormData
+        const data = new FormData(form);
+        const values = Object.fromEntries(data.entries());
+
+        // 3. Console Log the data
+        console.log("--- Form Submitted ---");
+        console.log("Full Data:", values);
+        console.log("Name:", data.get("fullName"));
+        console.log("Email:", data.get("email"));
+        console.log("Project:", data.get("projectType"));
+        console.log("Message:", data.get("message"));
+
+        // 4. Show success UI
+        form.reset();
+        modal.classList.remove("hidden");
+      });
+
+      // Modal close logic
+      document.getElementById("closeModal").onclick = () =>
+        modal.classList.add("hidden");
+      window.onclick = (e) => {
+        if (e.target === modal) modal.classList.add("hidden");
+      };
+    </script>
+  </body>
+</html>

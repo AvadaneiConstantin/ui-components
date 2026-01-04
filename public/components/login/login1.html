@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In | Secure Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center p-4 transition-colors"
+  >
+    <main class="max-w-md w-full">
+      <header class="mb-8 text-center">
+        <h1 class="text-3xl font-bold text-sky-600 dark:text-sky-400">
+          Sign In
+        </h1>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">
+          Access your secure account
+        </p>
+      </header>
+
+      <div
+        class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 border dark:border-gray-700"
+      >
+        <form id="loginForm" class="space-y-6" novalidate>
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Email address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="you@example.com"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+              placeholder="••••••••"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+            />
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label
+              class="flex items-center gap-2 text-sm cursor-pointer dark:text-gray-300"
+            >
+              <input
+                type="checkbox"
+                name="rememberMe"
+                class="h-4 w-4 rounded text-sky-600 border-gray-300 focus:ring-sky-500"
+              />
+              <span>Remember me</span>
+            </label>
+            <a
+              href="#"
+              class="text-sm text-sky-600 dark:text-sky-400 hover:underline"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg transition-all shadow-md active:scale-95 disabled:opacity-50"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+
+      <footer class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        <p>
+          Don't have an account?
+          <a href="#" class="text-sky-600 font-semibold">Sign up</a>
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const submitBtn = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // 1. Validation check
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // 2. Data collection via FormData
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // 3. Console log (as requested)
+        console.log("--- Login Data ---");
+        console.log("Email:", data.email);
+        console.log("Password Length:", data.password.length);
+        console.log("Remember Me:", !!data.rememberMe);
+
+        // 4. Success UI Interaction
+        handleSuccess();
+      });
+
+      function handleSuccess() {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Signing in...";
+
+        const toast = document.createElement("div");
+        toast.className =
+          "fixed bottom-4 left-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-2xl z-50 flex items-center gap-2 animate-bounce";
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> Success! Redirecting...`;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Sign In";
+          toast.remove();
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>

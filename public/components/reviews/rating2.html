@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share Your Experience | ProfiStack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body
+    class="bg-gray-50 dark:bg-gray-900 p-6 flex justify-center items-center min-h-screen"
+  >
+    <section
+      class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700"
+    >
+      <div class="text-center mb-8">
+        <h2
+          class="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight"
+        >
+          Share Your Experience
+        </h2>
+        <p class="text-gray-500 dark:text-gray-400 mt-2">
+          Your feedback helps us build a better product.
+        </p>
+      </div>
+
+      <form id="reviewForm" class="space-y-6">
+        <div class="text-center">
+          <label
+            class="block text-sm font-bold text-gray-400 uppercase tracking-widest mb-3"
+            >Overall Rating</label
+          >
+          <div id="starContainer" class="flex justify-center gap-2">
+            <button
+              type="button"
+              data-value="1"
+              class="star-btn text-3xl text-gray-200 dark:text-gray-700 hover:scale-110 transition-transform"
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              data-value="2"
+              class="star-btn text-3xl text-gray-200 dark:text-gray-700 hover:scale-110 transition-transform"
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              data-value="3"
+              class="star-btn text-3xl text-gray-200 dark:text-gray-700 hover:scale-110 transition-transform"
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              data-value="4"
+              class="star-btn text-3xl text-gray-200 dark:text-gray-700 hover:scale-110 transition-transform"
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              data-value="5"
+              class="star-btn text-3xl text-gray-200 dark:text-gray-700 hover:scale-110 transition-transform"
+            >
+              <i class="fas fa-star"></i>
+            </button>
+          </div>
+          <p
+            id="ratingLabel"
+            class="mt-2 text-sm font-bold text-sky-500 min-h-[20px]"
+          ></p>
+        </div>
+
+        <div class="relative">
+          <label
+            for="reviewText"
+            class="block text-sm font-bold text-gray-400 uppercase tracking-widest mb-2"
+            >Detailed Feedback</label
+          >
+          <textarea
+            id="reviewText"
+            maxlength="500"
+            rows="5"
+            placeholder="What did you love? What could we improve?"
+            class="w-full p-4 rounded-2xl bg-gray-50 dark:bg-gray-900 border-2 border-transparent focus:border-sky-500 focus:ring-0 text-gray-900 dark:text-white transition-all outline-none"
+          ></textarea>
+          <div
+            class="absolute bottom-4 right-4 text-xs font-mono text-gray-400"
+          >
+            <span id="charCount">0</span>/500
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button
+            type="submit"
+            class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-sky-600/20 active:scale-95 transition-all"
+          >
+            SUBMIT FEEDBACK
+          </button>
+          <button
+            type="reset"
+            id="resetBtn"
+            class="px-8 py-4 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-bold rounded-2xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all"
+          >
+            CANCEL
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <script>
+      const stars = document.querySelectorAll(".star-btn");
+      const label = document.getElementById("ratingLabel");
+      const textarea = document.getElementById("reviewText");
+      const charCount = document.getElementById("charCount");
+      let selectedRating = 0;
+
+      const ratingLevels = {
+        1: "Disappointing",
+        2: "Could be better",
+        3: "Good",
+        4: "Impressive",
+        5: "Exceptional",
+      };
+
+      // Star Logic
+      stars.forEach((star) => {
+        star.addEventListener("mouseenter", () =>
+          highlightStars(star.dataset.value)
+        );
+        star.addEventListener("mouseleave", () =>
+          highlightStars(selectedRating)
+        );
+        star.addEventListener("click", () => {
+          selectedRating = star.dataset.value;
+          label.textContent = ratingLevels[selectedRating];
+        });
+      });
+
+      function highlightStars(val) {
+        stars.forEach((s) => {
+          const icon = s.querySelector("i");
+          if (s.dataset.value <= val) {
+            icon.className = "fas fa-star text-yellow-400";
+          } else {
+            icon.className = "fas fa-star text-gray-200 dark:text-gray-700";
+          }
+        });
+      }
+
+      // Character Count Logic
+      textarea.addEventListener("input", (e) => {
+        charCount.textContent = e.target.value.length;
+      });
+
+      // Form Submission
+      document.getElementById("reviewForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (selectedRating === 0)
+          return alert("Please select a star rating first!");
+        alert(`Thanks for the ${selectedRating}-star review!`);
+      });
+
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        selectedRating = 0;
+        highlightStars(0);
+        label.textContent = "";
+        charCount.textContent = 0;
+      });
+    </script>
+  </body>
+</html>

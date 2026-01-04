@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .modal-active {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body
+    class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 transition-colors"
+  >
+    <main
+      class="w-full max-w-lg p-8 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border dark:border-gray-700"
+    >
+      <h1
+        class="text-3xl font-bold text-center text-sky-700 dark:text-sky-400 mb-8"
+      >
+        Contact Us
+      </h1>
+
+      <form id="contactForm" class="space-y-5" novalidate>
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Name</label
+          >
+          <input
+            id="name"
+            type="text"
+            required
+            placeholder="John Doe"
+            class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+          />
+          <p id="name-error" class="text-xs text-red-500 mt-1 hidden">
+            Please enter your name.
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Email</label
+          >
+          <input
+            id="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+          />
+          <p id="email-error" class="text-xs text-red-500 mt-1 hidden">
+            Please enter a valid email.
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="message"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            rows="4"
+            required
+            minlength="5"
+            placeholder="Your message..."
+            class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:ring-2 focus:ring-sky-500 outline-none resize-none transition-all"
+          ></textarea>
+          <p id="message-error" class="text-xs text-red-500 mt-1 hidden">
+            Message is too short.
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg transition-all shadow-md active:scale-95"
+        >
+          Send Message
+        </button>
+      </form>
+    </main>
+
+    <div
+      id="modal"
+      class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl max-w-sm w-full text-center"
+      >
+        <div class="text-green-500 text-5xl mb-4">✓</div>
+        <h2 class="text-2xl font-bold dark:text-white mb-2">Sent!</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          We'll get back to you soon.
+        </p>
+        <button
+          id="closeModal"
+          class="px-6 py-2 bg-sky-600 text-white rounded-lg font-semibold hover:bg-sky-700 transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      const modal = document.getElementById("modal");
+
+      // Simple Validation & Error Toggle
+      const validateField = (input) => {
+        const errorMsg = document.getElementById(`${input.id}-error`);
+        const isValid = input.checkValidity();
+
+        errorMsg.classList.toggle("hidden", isValid);
+        input.classList.toggle("border-red-500", !isValid);
+        return isValid;
+      };
+
+      // Form Submit Logic
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const inputs = form.querySelectorAll("input, textarea");
+        let isAllValid = true;
+
+        inputs.forEach((input) => {
+          if (!validateField(input)) isAllValid = false;
+        });
+
+        if (isAllValid) {
+          // Reset form and show modal
+          form.reset();
+          modal.classList.remove("hidden");
+          document.body.classList.add("modal-active");
+        }
+      });
+
+      // Close Modal Logic
+      document.getElementById("closeModal").onclick = () => {
+        modal.classList.add("hidden");
+        document.body.classList.remove("modal-active");
+      };
+    </script>
+  </body>
+</html>

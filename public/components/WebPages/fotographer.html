@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeless Moments | Event Photography</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --navy-blue: #1a365d;
+        --gold-accent: #d4af37;
+        --platinum: #e5e7eb;
+        --dark-charcoal: #111827;
+        --soft-white: #f9fafb;
+        --burgundy: #7f1d1d;
+      }
+
+      .dark {
+        --navy-blue: #1e40af;
+        --gold-accent: #fbbf24;
+        --platinum: #374151;
+        --dark-charcoal: #f3f4f6;
+        --soft-white: #111827;
+        --burgundy: #b91c1c;
+      }
+
+      .font-display {
+        font-family: "Playfair Display", serif;
+      }
+
+      .portfolio-hover {
+        transition: transform 0.3s ease;
+      }
+
+      .portfolio-hover:hover {
+        transform: scale(1.02);
+      }
+
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .testimonial-card {
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+        backdrop-filter: blur(10px);
+      }
+
+      .dark .testimonial-card {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0.1)
+        );
+      }
+
+      .hover-lift {
+        transition: all 0.3s ease;
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark .hover-lift:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gold-accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .stats-counter {
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Mobile menu fix */
+      #mobileMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      #mobileMenu.active {
+        max-height: 500px;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              navy: "var(--navy-blue)",
+              gold: "var(--gold-accent)",
+              platinum: "var(--platinum)",
+              charcoal: "var(--dark-charcoal)",
+              burgundy: "var(--burgundy)",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              display: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-soft-white text-charcoal font-sans transition-colors min-h-screen dark:bg-gray-900 dark:text-gray-100"
+  >
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-platinum dark:border-gray-800 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <a href="#" class="flex items-center space-x-3 group">
+            <div class="relative">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-navy to-burgundy rounded-lg flex items-center justify-center shadow-lg"
+              >
+                <i class="fas fa-camera text-white text-xl"></i>
+                <div
+                  class="absolute -inset-1 bg-gold/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="font-display text-2xl font-bold text-navy dark:text-white tracking-tight"
+                >Timeless Moments</span
+              >
+              <span
+                class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider"
+                >Event Photography</span
+              >
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-10">
+            <a
+              href="#home"
+              class="nav-link text-sm font-medium text-charcoal dark:text-gray-300"
+              >Home</a
+            >
+            <a
+              href="#portfolio"
+              class="nav-link text-sm font-medium text-charcoal dark:text-gray-300"
+              >Portfolio</a
+            >
+            <a
+              href="#services"
+              class="nav-link text-sm font-medium text-charcoal dark:text-gray-300"
+              >Services</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-sm font-medium text-charcoal dark:text-gray-300"
+              >Contact</a
+            >
+          </div>
+
+          <!-- Right Section -->
+          <div class="flex items-center space-x-6">
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
+            >
+              <i class="fas fa-moon dark:hidden text-lg"></i>
+              <i class="fas fa-sun hidden dark:block text-lg"></i>
+            </button>
+            <a
+              href="#contact"
+              class="hidden md:inline px-6 py-3 bg-gradient-to-r from-navy to-burgundy text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              <i class="fas fa-calendar-check mr-2"></i>Book Now
+            </a>
+            <button
+              id="mobileMenuToggle"
+              class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              <i class="fas fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden">
+          <div
+            class="py-4 space-y-1 border-t border-platinum dark:border-gray-800"
+          >
+            <a
+              href="#home"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Home</a
+            >
+            <a
+              href="#portfolio"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Portfolio</a
+            >
+            <a
+              href="#services"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Services</a
+            >
+            <a
+              href="#contact"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-navy/5 to-burgundy/5 dark:from-navy/10 dark:to-burgundy/10"
+      ></div>
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="fade-in-up">
+            <div
+              class="inline-flex items-center px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-semibold mb-6"
+            >
+              <i class="fas fa-award mr-2"></i> Award-Winning
+            </div>
+            <h1
+              class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-navy dark:text-white mb-6 leading-tight"
+            >
+              <span class="block">Capture</span>
+              <span class="text-gold">Your</span>
+              <span class="block">Moments</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-xl">
+              Professional event photography that transforms moments into
+              timeless memories.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#portfolio"
+                class="px-8 py-4 bg-gradient-to-r from-navy to-burgundy text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <i class="fas fa-images mr-2"></i>View Portfolio
+              </a>
+              <a
+                href="#contact"
+                class="px-8 py-4 border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/5 transition-all duration-300"
+              >
+                <i class="fas fa-phone mr-2"></i>Contact Us
+              </a>
+            </div>
+          </div>
+
+          <div class="fade-in-up relative">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-4">
+                <div
+                  class="relative h-64 rounded-2xl overflow-hidden shadow-xl hover-lift"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-navy/30 to-burgundy/30 bg-cover bg-center bg-no-repeat"
+                    style="
+                      background-image: url('../..//img/fotographer/wedding.jpg');
+                    "
+                  ></div>
+
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent"
+                  >
+                    <p class="text-white font-semibold">Weddings</p>
+                  </div>
+                </div>
+                <div
+                  class="relative h-48 rounded-2xl overflow-hidden shadow-xl hover-lift"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-navy/30 to-burgundy/30 bg-cover bg-center bg-no-repeat"
+                    style="
+                      background-image: url('../..//img/fotographer/baby.jpg');
+                    "
+                  ></div>
+
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent"
+                  >
+                    <p class="text-white font-semibold">Birthdays</p>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-4 mt-8">
+                <div
+                  class="relative h-48 rounded-2xl overflow-hidden shadow-xl hover-lift"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-navy/30 to-burgundy/30 bg-cover bg-center bg-no-repeat"
+                    style="
+                      background-image: url('../..//img/fotographer/couple.jpg');
+                    "
+                  ></div>
+
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent"
+                  >
+                    <p class="text-white font-semibold">Couples</p>
+                  </div>
+                </div>
+                <div
+                  class="relative h-64 rounded-2xl overflow-hidden shadow-xl hover-lift"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-navy/30 to-burgundy/30 bg-cover bg-center bg-no-repeat"
+                    style="
+                      background-image: url('../..//img/fotographer/family.jpg');
+                    "
+                  ></div>
+
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent"
+                  >
+                    <p class="text-white font-semibold">Family</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 fade-in-up">
+          <div class="text-center">
+            <div
+              class="text-4xl md:text-5xl font-bold text-navy dark:text-white mb-2 stats-counter"
+              id="eventsCounter"
+            >
+              850+
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 font-medium">
+              Events Captured
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-4xl md:text-5xl font-bold text-navy dark:text-white mb-2 stats-counter"
+              id="yearsCounter"
+            >
+              12
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 font-medium">
+              Years Experience
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-4xl md:text-5xl font-bold text-navy dark:text-white mb-2 stats-counter"
+              id="clientsCounter"
+            >
+              1200+
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 font-medium">
+              Happy Clients
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-4xl md:text-5xl font-bold text-navy dark:text-white mb-2 stats-counter"
+              id="awardsCounter"
+            >
+              28
+            </div>
+            <p class="text-gray-600 dark:text-gray-color font-medium">
+              Awards Won
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section
+      id="portfolio"
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-platinum dark:bg-gray-800"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-in-up">
+          <h2
+            class="font-display text-4xl sm:text-5xl font-bold text-navy dark:text-white mb-4"
+          >
+            Featured Moments
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Unforgettable moments captured with precision and emotion.
+          </p>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="image-grid fade-in-up">
+          <!-- Wedding Portfolio Item -->
+          <div
+            class="gallery-item relative rounded-2xl overflow-hidden shadow-xl hover-lift portfolio-hover"
+          >
+            <div
+              class="aspect-[4/3] bg-gradient-to-br from-navy/40 to-burgundy/40"
+              style="
+                background-image: url('../..//img/fotographer/wedding.jpg');
+                background-size: cover;
+                background-position: center;
+              "
+            ></div>
+            <div class="gallery-overlay">
+              <div class="text-white">
+                <p
+                  class="text-sm font-semibold uppercase tracking-wider text-gold"
+                >
+                  Wedding
+                </p>
+                <p class="font-display text-xl font-bold">Sarah & James</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Family Portfolio Item -->
+          <div
+            class="gallery-item relative rounded-2xl overflow-hidden shadow-xl hover-lift portfolio-hover"
+          >
+            <div
+              class="aspect-[4/3] bg-gradient-to-br from-gold/40 to-navy/40"
+              style="
+                background-image: url('../..//img/fotographer/family.jpg');
+                background-size: cover;
+                background-position: center;
+              "
+            ></div>
+            <div class="gallery-overlay">
+              <div class="text-white">
+                <p
+                  class="text-sm font-semibold uppercase tracking-wider text-gold"
+                >
+                  Family
+                </p>
+                <p class="font-display text-xl font-bold">The Johnson Family</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Couple Portfolio Item -->
+          <div
+            class="gallery-item relative rounded-2xl overflow-hidden shadow-xl hover-lift portfolio-hover"
+          >
+            <div
+              class="aspect-[4/3] bg-gradient-to-br from-burgundy/40 to-gold/40"
+              style="
+                background-image: url('../..//img/fotographer/couple.jpg');
+                background-size: cover;
+                background-position: center;
+              "
+            ></div>
+            <div class="gallery-overlay">
+              <div class="text-white">
+                <p
+                  class="text-sm font-semibold uppercase tracking-wider text-gold"
+                >
+                  Couple
+                </p>
+                <p class="font-display text-xl font-bold">Engagement Session</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Birthday Portfolio Item -->
+          <div
+            class="gallery-item relative rounded-2xl overflow-hidden shadow-xl hover-lift portfolio-hover"
+          >
+            <div
+              class="aspect-[4/3] bg-gradient-to-br from-navy/40 to-gold/40"
+              style="
+                background-image: url('../..//img/fotographer/baby.jpg');
+                background-size: cover;
+                background-position: center;
+              "
+            ></div>
+            <div class="gallery-overlay">
+              <div class="text-white">
+                <p
+                  class="text-sm font-semibold uppercase tracking-wider text-gold"
+                >
+                  Birthday
+                </p>
+                <p class="font-display text-xl font-bold">Sophia's Sweet 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-in-up">
+          <h2
+            class="font-display text-4xl sm:text-5xl font-bold text-navy dark:text-white mb-4"
+          >
+            Our Services
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Tailored photography packages for every special occasion.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Wedding Package -->
+          <div class="fade-in-up">
+            <div
+              class="bg-white dark:bg-gray-800 rounded-2xl hover-lift p-8 shadow-lg border border-platinum dark:border-gray-700"
+            >
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-navy to-burgundy rounded-lg flex items-center justify-center text-white text-2xl mb-6"
+              >
+                <i class="fas fa-ring"></i>
+              </div>
+              <h3
+                class="font-display text-2xl font-bold text-navy dark:text-white mb-4"
+              >
+                Weddings
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Full-day coverage, pre-wedding shoot, and luxury album.
+              </p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-navy dark:text-white"
+                  >$3,499</span
+                >
+              </div>
+              <a
+                href="#contact"
+                class="block w-full text-center px-6 py-3 border-2 border-navy text-navy dark:border-gold dark:text-gold font-semibold rounded-lg hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-navy transition-all duration-300"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Family Package -->
+          <div class="fade-in-up">
+            <div
+              class="bg-white dark:bg-gray-800 rounded-2xl hover-lift p-8 shadow-lg border border-platinum dark:border-gray-700"
+            >
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-gold to-navy rounded-lg flex items-center justify-center text-white text-2xl mb-6"
+              >
+                <i class="fas fa-users"></i>
+              </div>
+              <h3
+                class="font-display text-2xl font-bold text-navy dark:text-white mb-4"
+              >
+                Family
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                3-hour session, digital gallery, and premium prints.
+              </p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-navy dark:text-white"
+                  >$899</span
+                >
+              </div>
+              <a
+                href="#contact"
+                class="block w-full text-center px-6 py-3 border-2 border-navy text-navy dark:border-gold dark:text-gold font-semibold rounded-lg hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-navy transition-all duration-300"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Couple Package -->
+          <div class="fade-in-up">
+            <div
+              class="bg-white dark:bg-gray-800 rounded-2xl hover-lift p-8 shadow-lg border border-platinum dark:border-gray-700"
+            >
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-burgundy to-gold rounded-lg flex items-center justify-center text-white text-2xl mb-6"
+              >
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3
+                class="font-display text-2xl font-bold text-navy dark:text-white mb-4"
+              >
+                Couples
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                2-hour intimate session and digital gallery.
+              </p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-navy dark:text-white"
+                  >$599</span
+                >
+              </div>
+              <a
+                href="#contact"
+                class="block w-full text-center px-6 py-3 border-2 border-navy text-navy dark:border-gold dark:text-gold font-semibold rounded-lg hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-navy transition-all duration-300"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Event Package -->
+          <div class="fade-in-up">
+            <div
+              class="bg-white dark:bg-gray-800 rounded-2xl hover-lift p-8 shadow-lg border border-platinum dark:border-gray-700"
+            >
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-navy to-gold rounded-lg flex items-center justify-center text-white text-2xl mb-6"
+              >
+                <i class="fas fa-birthday-cake"></i>
+              </div>
+              <h3
+                class="font-display text-2xl font-bold text-navy dark:text-white mb-4"
+              >
+                Events
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Birthdays, corporate events, and celebrations.
+              </p>
+              <div class="mb-6">
+                <span class="text-3xl font-bold text-navy dark:text-white"
+                  >From $399</span
+                >
+              </div>
+              <a
+                href="#contact"
+                class="block w-full text-center px-6 py-3 border-2 border-navy text-navy dark:border-gold dark:text-gold font-semibold rounded-lg hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-navy transition-all duration-300"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-navy to-burgundy text-white"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">
+            Client Reviews
+          </h2>
+          <p class="text-xl opacity-90 max-w-3xl mx-auto">
+            What our clients say about their experience.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="testimonial-card rounded-2xl p-8 fade-in-up">
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <p class="text-lg mb-6">
+              "Absolutely breathtaking photos from our wedding. Perfection."
+            </p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full"></div>
+              <div class="ml-4">
+                <p class="font-bold">Emily & Robert</p>
+                <p class="text-sm opacity-80">Wedding</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card rounded-2xl p-8 fade-in-up">
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <p class="text-lg mb-6">
+              "Incredible family photos. Professional and talented!"
+            </p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full"></div>
+              <div class="ml-4">
+                <p class="font-bold">The Chen Family</p>
+                <p class="text-sm opacity-80">Family Portraits</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card rounded-2xl p-8 fade-in-up">
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <p class="text-lg mb-6">
+              "Stunning engagement photos. Exceeded all expectations."
+            </p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full"></div>
+              <div class="ml-4">
+                <p class="font-bold">Jessica & Michael</p>
+                <p class="text-sm opacity-80">Engagement</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div class="fade-in-up">
+            <h2
+              class="font-display text-4xl sm:text-5xl font-bold text-navy dark:text-white mb-6"
+            >
+              Contact Us
+            </h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+              Ready to preserve your special moments? Get in touch.
+            </p>
+
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-phone text-gold"></i>
+                </div>
+                <div>
+                  <h4
+                    class="font-display text-xl font-bold text-navy dark:text-white mb-1"
+                  >
+                    Phone
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-300">(555) 123-4567</p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-envelope text-gold"></i>
+                </div>
+                <div>
+                  <h4
+                    class="font-display text-xl font-bold text-navy dark:text-white mb-1"
+                  >
+                    Email
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    hello@timlessmoments.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-in-up">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <form id="contactForm" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                      >First Name</label
+                    >
+                    <input
+                      type="text"
+                      class="w-full px-4 py-3 rounded-lg border border-platinum dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                      >Last Name</label
+                    >
+                    <input
+                      type="text"
+                      class="w-full px-4 py-3 rounded-lg border border-platinum dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    class="w-full px-4 py-3 rounded-lg border border-platinum dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    >Message</label
+                  >
+                  <textarea
+                    rows="4"
+                    class="w-full px-4 py-3 rounded-lg border border-platinum dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
+                    placeholder="Tell us about your event..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full px-8 py-4 bg-gradient-to-r from-navy to-burgundy text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col items-center text-center">
+          <div class="flex items-center space-x-3 mb-6">
+            <div
+              class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-camera text-white"></i>
+            </div>
+            <span class="font-display text-xl font-bold">Timeless Moments</span>
+          </div>
+          <p class="text-sm opacity-80 mb-6 max-w-md">
+            Professional event photography for weddings, families, and
+            celebrations.
+          </p>
+          <p class="text-sm opacity-60">
+            &copy; <span id="currentYear"></span> Timeless Moments.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        mobileMenuToggle.addEventListener("click", function () {
+          mobileMenu.classList.toggle("active");
+          const icon = this.querySelector("i");
+          if (mobileMenu.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-times");
+          } else {
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          }
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+
+        function initDarkMode() {
+          const saved = localStorage.getItem("darkMode");
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          if (saved === "true" || (saved === null && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          }
+        }
+
+        function toggleDarkMode() {
+          document.documentElement.classList.toggle("dark");
+          localStorage.setItem(
+            "darkMode",
+            document.documentElement.classList.contains("dark")
+          );
+        }
+
+        darkModeToggle.addEventListener("click", toggleDarkMode);
+        initDarkMode();
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll("#mobileMenu a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            mobileMenuToggle.querySelector("i").classList.remove("fa-times");
+            mobileMenuToggle.querySelector("i").classList.add("fa-bars");
+          });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Set current year
+        document.getElementById("currentYear").textContent =
+          new Date().getFullYear();
+
+        // Simple form submission
+        const contactForm = document.getElementById("contactForm");
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Thank you! We will contact you soon.");
+            this.reset();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

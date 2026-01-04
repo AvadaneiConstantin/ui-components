@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Reviews Only | Tailwind Component</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            animation: {
+              "fade-in": "fadeIn 0.3s ease-out",
+              "slide-up": "slideUp 0.4s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(10px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary-color: #3b82f6;
+        --star-color: #f59e0b;
+      }
+      .focus-ring {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+      .focus-ring:focus-visible {
+        outline-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 p-4 md:p-6 min-h-screen">
+    <main class="max-w-6xl mx-auto">
+      <article
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden animate-fade-in"
+      >
+        <header
+          class="p-6 md:p-8 border-b border-gray-100 dark:border-gray-700"
+        >
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+          >
+            <div>
+              <h1
+                class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white"
+              >
+                Customer Reviews
+              </h1>
+              <p class="text-gray-600 dark:text-gray-400 mt-2">
+                Read what our customers are saying
+              </p>
+            </div>
+
+            <div
+              class="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl"
+            >
+              <div class="text-center">
+                <div class="text-3xl font-bold text-gray-900 dark:text-white">
+                  4.8
+                </div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">
+                  out of 5
+                </div>
+              </div>
+              <div>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  Based on 2,487 reviews
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section id="reviews-section" class="p-6 md:p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article
+              class="bg-gray-50/50 dark:bg-gray-700/30 p-5 rounded-xl border border-gray-200 dark:border-gray-600/30 hover:border-blue-200 dark:hover:border-blue-500/30 transition-colors animate-slide-up"
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg"
+                  >
+                    AJ
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3
+                      class="font-bold text-gray-900 dark:text-white truncate"
+                    >
+                      Alex Johnson
+                    </h3>
+                    <time class="text-sm text-gray-500 dark:text-gray-400"
+                      >2 days ago</time
+                    >
+                  </div>
+                  <div class="flex text-yellow-400 mb-3">
+                    <i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i>
+                  </div>
+                  <p
+                    class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+                  >
+                    "Excellent product quality and incredibly fast delivery! The
+                    customer support team was super helpful throughout."
+                  </p>
+                  <div class="mt-4 flex items-center gap-4 text-xs">
+                    <button
+                      class="helpful-btn flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+                    >
+                      <i class="fas fa-thumbs-up"></i> <span>Helpful (42)</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="bg-gray-50/50 dark:bg-gray-700/30 p-5 rounded-xl border border-gray-200 dark:border-gray-600/30 hover:border-green-200 dark:hover:border-green-500/30 transition-colors animate-slide-up"
+              style="animation-delay: 0.1s"
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-white font-bold text-lg"
+                  >
+                    SM
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3
+                      class="font-bold text-gray-900 dark:text-white truncate"
+                    >
+                      Sarah Miller
+                    </h3>
+                    <time class="text-sm text-gray-500 dark:text-gray-400"
+                      >1 week ago</time
+                    >
+                  </div>
+                  <div class="flex text-yellow-400 mb-3">
+                    <i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star-half-alt text-sm"></i>
+                  </div>
+                  <p
+                    class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+                  >
+                    "Great customer support and will definitely buy again! The
+                    product exceeded my expectations."
+                  </p>
+                  <div
+                    class="mt-3 inline-flex items-center gap-1 px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-[10px]"
+                  >
+                    <i class="fas fa-check-circle"></i>
+                    <span>Verified Purchase</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="bg-gray-50/50 dark:bg-gray-700/30 p-5 rounded-xl border border-gray-200 dark:border-gray-600/30 hover:border-purple-200 dark:hover:border-purple-500/30 transition-colors animate-slide-up"
+              style="animation-delay: 0.2s"
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold text-lg"
+                  >
+                    RT
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3
+                      class="font-bold text-gray-900 dark:text-white truncate"
+                    >
+                      Ryan Thompson
+                    </h3>
+                    <time class="text-sm text-gray-500 dark:text-gray-400"
+                      >2 weeks ago</time
+                    >
+                  </div>
+                  <div class="flex text-yellow-400 mb-3">
+                    <i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="fas fa-star text-sm"></i
+                    ><i class="far fa-star text-sm"></i>
+                  </div>
+                  <p
+                    class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+                  >
+                    "Good value for money. The product works as described.
+                    Shipping was a bit slow but acceptable."
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-8 text-center">
+            <button
+              class="focus-ring inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
+            >
+              <span>View All 2,487 Reviews</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <script>
+      // Funcționalitate simplă pentru butoanele de Helpful
+      document.querySelectorAll(".helpful-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const span = this.querySelector("span");
+          const count = parseInt(span.textContent.match(/\d+/)[0]);
+          span.textContent = `Helpful (${count + 1})`;
+          this.classList.add("text-blue-600");
+          this.disabled = true;
+        });
+      });
+    </script>
+  </body>
+</html>

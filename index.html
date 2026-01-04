@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Components Showcase</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Google Fonts - simplificat -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+    />
+
+    <link rel="stylesheet" href="/src/input.css" />
+  </head>
+  <body
+    class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+  >
+    <!-- Scroll to top button -->
+    <button
+      id="scrollToTop"
+      class="scroll-to-top hidden py-1 px-3 bg-sky-800 hover:bg-sky-700 text-white rounded-full shadow-lg transition-all hover:scale-105"
+      aria-label="Scroll to top"
+    >
+      <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <div class="w-full max-w-6xl mx-auto px-4 py-8">
+      <!-- Header -->
+      <header class="grid grid-cols-3 items-center mb-6 pt-4">
+        <div></div>
+        <div class="text-center">
+          <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+            <span class="text-sky-600 dark:text-sky-400 drop-shadow-lg">
+              UI Components
+            </span>
+          </h1>
+        </div>
+        <div class="flex justify-end">
+          <button
+            id="themeToggle"
+            class="p-2 w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            aria-label="Toggle theme"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Navigation : all category -->
+      <nav class="w-full mb-8">
+        <div
+          class="flex flex-wrap justify-center gap-4 md:gap-8 border-b border-gray-200 dark:border-gray-700"
+          id="categoryTabs"
+        >
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="landing"
+          >
+            <i class="fas fa-plane-arrival text-xs"></i>
+            <span>Landing</span>
+          </button>
+
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="navbar"
+          >
+            <i class="fas fa-bars text-xs"></i>
+            <span>Navbar</span>
+          </button>
+
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="login"
+          >
+            <i class="fas fa-sign-in-alt text-xs"></i>
+            <span>Login</span>
+          </button>
+
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="review"
+          >
+            <i class="fas fa-star text-xs"></i>
+            <span>Review</span>
+          </button>
+
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="contact"
+          >
+            <i class="fas fa-envelope text-xs"></i>
+            <span>Contact</span>
+          </button>
+
+          <button
+            class="category-tab pb-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors flex items-center gap-2"
+            data-category="webApp"
+          >
+            <i class="fas fa-layer-group text-xs"></i>
+            <span>Web App</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content - Slider -->
+      <main class="relative">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700"
+        >
+          <div
+            class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-gray-800/50"
+          >
+            <div>
+              <h2 class="font-bold text-lg" id="componentTitle">
+                Select a component
+              </h2>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button
+                id="playPauseBtn"
+                class="flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                title="Play/Pause Auto Slideshow"
+                aria-label="Play or pause auto slideshow"
+              >
+                <i class="fas fa-play" id="playPauseIcon"></i>
+                <span id="playPauseText">Play</span>
+              </button>
+
+              <button
+                id="fullscreenBtn"
+                class="flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                title="Open in New Tab (F)"
+                aria-label="Open component in new tab"
+              >
+                <i class="fas fa-external-link-alt"></i>
+                <span>Open Tab</span>
+              </button>
+
+              <button
+                id="expandToggle"
+                class="flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                title="Expand/Collapse"
+                aria-label="Expand or collapse preview"
+              >
+                <i class="fas fa-expand-alt"></i>
+                <span id="expandText">Expand</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="slideContainer" class="relative">
+            <div
+              id="loadingOverlay"
+              class="hidden absolute inset-0 bg-white/90 dark:bg-gray-800/90 flex items-center justify-center z-20"
+            >
+              <div class="loader"></div>
+            </div>
+
+            <div
+              id="slidePlaceholder"
+              class="h-full flex items-center justify-center text-gray-500 dark:text-gray-400"
+            >
+              <div class="text-center">
+                <i class="fas fa-layer-group text-5xl mb-4 opacity-30"></i>
+                <p>Select a component category</p>
+              </div>
+            </div>
+
+            <iframe
+              id="componentFrame"
+              class="component-frame hidden"
+              title="Component Preview"
+              loading="lazy"
+              aria-label="Component preview"
+            ></iframe>
+
+            <button
+              id="prevBtn"
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 dark:bg-gray-700/80 shadow-lg hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed transition-transform"
+              aria-label="Previous component"
+              disabled
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              id="nextBtn"
+              class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 dark:bg-gray-700/80 shadow-lg hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed transition-transform"
+              aria-label="Next component"
+              disabled
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bullets indicator -->
+        <div class="flex justify-center mt-4">
+          <div class="flex gap-2" id="bullets"></div>
+        </div>
+      </main>
+
+      <!-- About Components Section -->
+      <section class="py-12">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="text-center mb-10">
+            <h2
+              class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4"
+            >
+              <i class="fas fa-cube mr-3"></i>About Components
+            </h2>
+            <p
+              class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            >
+              Professional UI components using modern web technologies
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            <div
+              class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md fade-in"
+            >
+              <div class="text-sky-600 dark:text-sky-400 text-2xl mb-4">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                Production-Ready Code
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                Built with semantic HTML5, Tailwind CSS, and vanilla ES6+
+                JavaScript.
+                <strong>Zero dependencies</strong>, fully accessible, and easy
+                to integrate.
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md fade-in"
+            >
+              <div class="text-green-600 dark:text-green-400 text-2xl mb-4">
+                <i class="fas fa-tachometer-alt"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                Lighthouse Optimized
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                Verified <strong>95-100 Performance scores</strong> with perfect
+                100/100 SEO & Accessibility. All components pass Core Web Vitals
+                testing.
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md fade-in"
+            >
+              <div class="text-purple-600 dark:text-purple-400 text-2xl mb-4">
+                <i class="fas fa-vial"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                Cross-Browser Tested
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                Rigorously tested on Chrome, Firefox, Safari, and Edge.
+                <strong>Mobile-first responsive design</strong> that works
+                flawlessly.
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 justify-center mb-8">
+            <button
+              id="showMoreInfo"
+              class="px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition-colors duration-200 flex items-center"
+            >
+              <i class="fas fa-info-circle mr-2"></i>Show More Info
+            </button>
+            <button
+              id="screenshotsBtn"
+              class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-200 flex items-center"
+            >
+              <i class="fas fa-images mr-2"></i>See Screenshots
+            </button>
+          </div>
+
+          <!-- Dynamic Content -->
+          <div id="dynamicContentContainer" class="mb-8"></div>
+
+          <!-- CTA Section -->
+          <div class="text-center">
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              Ready to elevate your projects with professional components?
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Contact Info -->
+            <div class="space-y-4">
+              <h3
+                class="text-xl font-bold text-gray-800 dark:text-white flex items-center"
+              >
+                <i class="fas fa-user mr-2 text-sky-500"></i>
+                Frontend Developer
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                Specializing in creating reusable, performant UI components with
+                modern web technologies.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center text-gray-600 dark:text-gray-400">
+                  <i class="fas fa-envelope mr-3 text-sky-500"></i>
+                  <span>contact@uicomponents.dev</span>
+                </div>
+                <div class="flex items-center text-gray-600 dark:text-gray-400">
+                  <i class="fab fa-linkedin mr-3 text-sky-500"></i>
+                  <a href="#" class="hover:text-sky-500 hover:underline"
+                    >LinkedIn Profile</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="space-y-4">
+              <h3
+                class="text-xl font-bold text-gray-800 dark:text-white flex items-center"
+              >
+                <i class="fas fa-code mr-2 text-green-500"></i>
+                Technologies & Skills
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-200 rounded-full text-sm"
+                  >HTML5</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm"
+                  >Tailwind CSS</span
+                >
+                <span
+                  class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm"
+                  >JavaScript</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                  >Accessibility</span
+                >
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Each component is built with attention to detail, focusing on
+                user experience and maintainability.
+              </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-4">
+              <h3
+                class="text-xl font-bold text-gray-800 dark:text-white flex items-center"
+              >
+                <i class="fas fa-link mr-2 text-purple-500"></i>
+                Project Links
+              </h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-600 dark:text-gray-400 hover:text-sky-500 hover:underline flex items-center"
+                  >
+                    <i class="fas fa-chevron-right mr-2 text-xs"></i>CV Html
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://urban-food-prod.netlify.app/"
+                    class="text-gray-600 dark:text-gray-400 hover:text-sky-500 hover:underline flex items-center"
+                  >
+                    <i class="fas fa-chevron-right mr-2 text-xs"></i>Urban Food
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://mate-fix.netlify.app/"
+                    class="text-gray-600 dark:text-gray-400 hover:text-sky-500 hover:underline flex items-center"
+                  >
+                    <i class="fas fa-chevron-right mr-2 text-xs"></i>Mate Fix
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Copyright -->
+          <div
+            class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center"
+          >
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+              © 2026 UI Components Showcase. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/slider.js"></script>
+    <script type="module" src="/src/info.js"></script>
+  </body>
+</html>

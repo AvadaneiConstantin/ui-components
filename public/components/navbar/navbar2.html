@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProfiStack | Premium Navigation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .glass-nav {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .dark .glass-nav {
+        background: rgba(17, 24, 39, 0.85);
+      }
+
+      /* Desktop Hover Underline */
+      .nav-link {
+        position: relative;
+        transition: color 0.3s;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Mobile Menu Animation */
+      #mobileMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #mobileMenu.open {
+        max-height: 600px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 transition-colors">
+    <nav
+      class="sticky top-0 z-50 glass-nav border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm"
+      role="navigation"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+          <div class="flex items-center">
+            <a href="#" class="flex items-center gap-3 group">
+              <div
+                class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"
+              >
+                <i class="fas fa-chart-line text-white"></i>
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-bold text-xl text-gray-900 dark:text-white tracking-tight"
+                  >Profi<span class="text-blue-600 dark:text-blue-400"
+                    >Stack</span
+                  ></span
+                >
+                <span
+                  class="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-bold"
+                  >Solutions</span
+                >
+              </div>
+            </a>
+          </div>
+
+          <div class="hidden lg:flex items-center space-x-8">
+            <a
+              href="#"
+              class="nav-link active text-gray-700 dark:text-gray-300 font-medium py-2 hover:text-blue-600 dark:hover:text-blue-400"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-700 dark:text-gray-300 font-medium py-2 hover:text-blue-600 dark:hover:text-blue-400"
+              >Services</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-700 dark:text-gray-300 font-medium py-2 hover:text-blue-600 dark:hover:text-blue-400"
+              >Products</a
+            >
+            <a
+              href="#"
+              class="nav-link text-gray-700 dark:text-gray-300 font-medium py-2 hover:text-blue-600 dark:hover:text-blue-400"
+              >About</a
+            >
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-4">
+            <button
+              id="themeToggle"
+              class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              <i class="fas fa-moon dark:hidden"></i>
+              <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+
+            <button
+              id="notifBtn"
+              class="relative p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
+            >
+              <i class="fas fa-bell text-xl"></i>
+              <span
+                id="notifBadge"
+                class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center animate-pulse"
+                >3</span
+              >
+            </button>
+
+            <a
+              href="#"
+              class="hidden md:block px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg active:scale-95 transition-all"
+            >
+              Get Started
+            </a>
+
+            <button
+              id="mobileMenuBtn"
+              class="lg:hidden p-2 text-gray-700 dark:text-gray-300"
+            >
+              <i
+                id="burgerIcon"
+                class="fas fa-bars text-2xl transition-transform duration-300"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="lg:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800"
+      >
+        <div class="px-4 py-6 space-y-2">
+          <a
+            href="#"
+            class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 font-semibold"
+          >
+            <i class="fas fa-home w-5"></i> Home
+          </a>
+          <a
+            href="#"
+            class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          >
+            <i class="fas fa-cog w-5"></i> Services
+          </a>
+          <a
+            href="#"
+            class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          >
+            <i class="fas fa-box w-5"></i> Products
+          </a>
+          <a
+            href="#"
+            class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          >
+            <i class="fas fa-envelope w-5"></i> Contact
+          </a>
+
+          <div class="pt-4 border-t border-gray-100 dark:border-gray-800">
+            <button
+              class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md"
+            >
+              Get Started Free
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-20 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Responsive Glass Navigation
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        Refactored to fix the <code>toggleMenu</code> scope error.
+      </p>
+    </main>
+
+    <script>
+      // Selectors
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const burgerIcon = document.getElementById("burgerIcon");
+      const themeToggle = document.getElementById("themeToggle");
+      const notifBtn = document.getElementById("notifBtn");
+      const notifBadge = document.getElementById("notifBadge");
+
+      // Toggle Menu
+      function toggleMenu(forceClose = false) {
+        const isOpen = mobileMenu.classList.contains("open");
+        const shouldOpen = forceClose ? false : !isOpen;
+
+        mobileMenu.classList.toggle("open", shouldOpen);
+        burgerIcon.classList.toggle("fa-bars", !shouldOpen);
+        burgerIcon.classList.toggle("fa-times", shouldOpen);
+        burgerIcon.style.transform = shouldOpen
+          ? "rotate(90deg)"
+          : "rotate(0deg)";
+      }
+
+      // Event: Mobile Toggle Click
+      mobileMenuBtn.addEventListener("click", () => toggleMenu());
+
+      // Event: Close on link click
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          console.log(`Navigating to: ${link.innerText.trim()}`);
+          toggleMenu(true);
+        });
+      });
+
+      /**
+       * 2. Theme Switching Logic
+       */
+      function initTheme() {
+        const isDark =
+          localStorage.getItem("theme") === "dark" ||
+          (!localStorage.getItem("theme") &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", isDark);
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+
+      /**
+       * 3. Notifications Logic
+       */
+      notifBtn.addEventListener("click", () => {
+        if (notifBadge) {
+          notifBadge.remove(); // Clears notifications
+          console.log("Notifications Cleared");
+        }
+      });
+
+      /**
+       * 4. Accessibility & Cleanup
+       */
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) toggleMenu(true);
+      });
+
+      // Initialize
+      initTheme();
+    </script>
+  </body>
+</html>

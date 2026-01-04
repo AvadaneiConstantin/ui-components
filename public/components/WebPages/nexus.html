@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexusFlow | Revolutionizing Digital Workflows</title>
+    <meta
+      name="description"
+      content="Seamless integration and advanced analytics powered by self-healing infrastructure."
+    />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Loading -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                400: "#38bdf8",
+                600: "#0284c7",
+              },
+              secondary: {
+                400: "#818cf8",
+                600: "#4f46e5",
+                700: "#4338ca",
+              },
+              accent: {
+                400: "#34d399",
+                600: "#059669",
+              },
+              warning: {
+                400: "#f87171",
+                600: "#dc2626",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-up": "slideUp 0.3s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+
+      // Initialize dark mode based on system preference
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+
+    <style>
+      /* CSS Variables for better maintainability */
+      :root {
+        --transition-speed: 300ms;
+        --border-radius: 0.5rem;
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Focus styles */
+      .focus-visible {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+
+      /* Typing animation */
+      .typing-cursor::after {
+        content: "|";
+        display: inline-block;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* Tilt effect */
+      .tilt-card {
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease-out;
+      }
+
+      .tilt-card:hover {
+        transform: rotateY(5deg) rotateX(5deg) scale(1.02);
+      }
+
+      /* Video background */
+      .video-container {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      }
+
+      .video-container video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+      }
+
+      /* Navbar blur effect */
+      .navbar-blur {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Utility classes */
+      .text-balance {
+        text-wrap: balance;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-500"
+  >
+    <!-- TRANSPARENT NAVBAR -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 navbar-blur bg-white/50 dark:bg-gray-900/80 border-b border-gray-200/20 dark:border-gray-700/20 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a href="#" class="flex items-center space-x-2 group">
+              <div
+                class="w-8 h-8 bg-gradient-to-br from-primary-400 to-secondary-600 rounded-lg flex items-center justify-center"
+              >
+                <span class="text-white font-bold text-lg">N</span>
+              </div>
+              <span
+                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200"
+              >
+                NexusFlow
+              </span>
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#features"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+            >
+              Features
+            </a>
+            <a
+              href="#solutions"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+            >
+              Solutions
+            </a>
+            <a
+              href="#pricing"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+            >
+              Pricing
+            </a>
+            <a
+              href="#resources"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+            >
+              Resources
+            </a>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex items-center space-x-4">
+            <a
+              href="#login"
+              class="hidden md:inline text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
+            >
+              Sign In
+            </a>
+            <a
+              href="#trial"
+              class="px-4 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+            >
+              Start Free Trial
+            </a>
+
+            <!-- Mobile menu button -->
+            <button
+              id="mobile-menu-button"
+              class="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden py-4 space-y-3 border-t border-gray-200/20 dark:border-gray-700/20 mt-2"
+        >
+          <a
+            href="#features"
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+          >
+            Features
+          </a>
+          <a
+            href="#solutions"
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+          >
+            Solutions
+          </a>
+          <a
+            href="#pricing"
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+          >
+            Pricing
+          </a>
+          <a
+            href="#resources"
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+          >
+            Resources
+          </a>
+          <a
+            href="#login"
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+          >
+            Sign In
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <!-- HERO SECTION 1: VIDEO BACKGROUND -->
+      <section class="video-container h-[600px] md:h-[700px] flex items-center">
+        <video autoplay muted loop playsinline class="opacity-60">
+          <!-- <source src="/video/3.mp4" type="video/mp4" /> -->
+          <source src="../../video/3.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+          <h1
+            class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight text-balance"
+          >
+            <span class="text-primary-400">Revolutionizing</span> Digital
+            Workflows.
+          </h1>
+
+          <p class="text-xl text-gray-200 mb-10 max-w-3xl mx-auto text-balance">
+            Seamless integration and advanced analytics powered by a
+            self-healing infrastructure. Focus on creativity, not complexity.
+          </p>
+
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#start" class="btn-primary"> Get Started Today </a>
+            <a href="#learn" class="btn-secondary"> View Documentation </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO SECTION 2: IMPROVED FEATURE BLOCK -->
+      <section id="features" class="bg-gray-50 dark:bg-gray-800 py-20 md:py-32">
+        <div
+          class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
+          <!-- Text and Stats Column -->
+          <div class="animate-fade-in">
+            <h1
+              class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+            >
+              Unlock Your
+              <span
+                class="text-secondary-600 dark:text-secondary-400 font-black"
+                >Growth</span
+              >
+              Potential.
+            </h1>
+
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-xl">
+              Our platform provides the necessary tools and insights to scale
+              your business efficiently, without technical debt. We handle the
+              complexity, you focus on the future.
+            </p>
+
+            <!-- Stats Section -->
+            <div class="flex flex-wrap gap-8 mb-12">
+              <div>
+                <p
+                  class="text-5xl font-black text-secondary-600 dark:text-secondary-400"
+                  id="stat-1"
+                >
+                  0%
+                </p>
+                <p
+                  class="text-sm font-semibold text-gray-500 dark:text-gray-400 mt-2 uppercase tracking-wide"
+                >
+                  Daily Transactions
+                </p>
+              </div>
+              <div>
+                <p
+                  class="text-5xl font-black text-secondary-600 dark:text-secondary-400"
+                  id="stat-2"
+                >
+                  0%
+                </p>
+                <p
+                  class="text-sm font-semibold text-gray-500 dark:text-gray-400 mt-2 uppercase tracking-wide"
+                >
+                  Uptime Guarantee
+                </p>
+              </div>
+            </div>
+
+            <a href="#trial" class="btn-accent"> Start 14-Day Free Trial </a>
+          </div>
+
+          <!-- Image/Preview Column -->
+          <div class="relative animate-slide-up">
+            <div
+              class="relative h-[450px] bg-white dark:bg-gray-700 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-600"
+            >
+              <img
+                src="../../img/exp.png"
+                alt="Platform Dashboard Preview"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO SECTION 3: IMAGE TILT -->
+      <section class="bg-white dark:bg-gray-900 py-20 md:py-32">
+        <div
+          class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
+          <div class="animate-fade-in">
+            <h1
+              class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+            >
+              Data-Driven
+              <span class="text-accent-600 dark:text-accent-400 font-black"
+                >Insights</span
+              >.
+            </h1>
+
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl">
+              Gain clarity with our beautifully designed dashboards. Every
+              decision becomes effortless when data is visualized perfectly.
+            </p>
+
+            <a href="#features" class="btn-success"> Discover Features </a>
+          </div>
+
+          <div class="relative">
+            <img
+              src="../../img/exp.png"
+              alt="Interactive Analytics Dashboard"
+              class="rounded-2xl shadow-2xl w-full tilt-card"
+              loading="lazy"
+            />
+            <div
+              class="absolute -top-4 -right-4 w-12 h-12 bg-accent-500 rounded-full animate-bounce-slow"
+              aria-hidden="true"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO SECTION 4: TYPING ANIMATION -->
+      <section class="bg-gray-900 dark:bg-black py-24 md:py-48">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+          <p class="text-xl font-medium text-warning-400 mb-4 tracking-wide">
+            The Next Generation of Web Development
+          </p>
+
+          <h1
+            class="text-5xl md:text-8xl font-black text-white leading-none mb-8 tracking-tight"
+          >
+            Build. Ship.
+            <span class="text-warning-400 typing-cursor" id="animated-text"
+              >Scale</span
+            >.
+          </h1>
+
+          <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto text-balance">
+            Stop fighting frameworks and start delivering results. Our unified
+            stack makes deployment immediate and joyfully simple.
+          </p>
+
+          <a href="#join" class="btn-warning"> Join the Movement </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 border-t border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div class="space-y-4">
+            <a href="#" class="flex items-center space-x-2 group">
+              <div
+                class="w-8 h-8 bg-gradient-to-br from-primary-400 to-secondary-600 rounded-lg flex items-center justify-center"
+              >
+                <span class="text-white font-bold">N</span>
+              </div>
+              <span
+                class="text-xl font-bold text-white group-hover:text-primary-400 transition-colors duration-200"
+              >
+                NexusFlow
+              </span>
+            </a>
+            <p class="text-gray-400 text-sm">
+              Revolutionizing digital workflows with cutting-edge technology and
+              seamless integration.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                aria-label="Twitter"
+                class="text-gray-400 hover:text-primary-400 transition-colors duration-200"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                aria-label="GitHub"
+                class="text-gray-400 hover:text-primary-400 transition-colors duration-200"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                class="text-gray-400 hover:text-primary-400 transition-colors duration-200"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Product Links -->
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Product</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#features"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Features</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#pricing"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#api"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >API</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#documentation"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#status"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Status</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Company Links -->
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Company</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#about"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#blog"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#careers"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#press"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Press</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal Links -->
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Legal</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#privacy"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#terms"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#security"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Security</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#cookies"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Cookie Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#compliance"
+                  class="hover:text-primary-400 transition-colors duration-200"
+                  >Compliance</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-gray-800 mt-8 pt-4 text-center text-sm text-gray-500"
+        >
+          <p>&copy; 2026 NexusFlow, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. Mobile Menu Logic ---
+        const menuBtn = document.getElementById("mobile-menu-button");
+        const menu = document.getElementById("mobile-menu");
+
+        const toggleMenu = (forceClose = false) => {
+          const isHidden = menu.classList.toggle("hidden", forceClose);
+          if (!isHidden) menu.classList.add("animate-slide-up");
+        };
+
+        menuBtn?.addEventListener(
+          "click",
+          (e) => (e.stopPropagation(), toggleMenu())
+        );
+        document.addEventListener("click", () => toggleMenu(true));
+        menu
+          ?.querySelectorAll("a")
+          .forEach((link) =>
+            link.addEventListener("click", () => toggleMenu(true))
+          );
+
+        // --- 2. Typing Animation ---
+        const textEl = document.getElementById("animated-text");
+        const words = ["Scale", "Deliver", "Thrive", "Iterate"];
+        let wordIdx = 0,
+          charIdx = 0,
+          isDeleting = false;
+
+        const type = () => {
+          const currentWord = words[wordIdx];
+          charIdx += isDeleting ? -1 : 1;
+          textEl.textContent = currentWord.substring(0, charIdx);
+
+          let speed = isDeleting ? 75 : 150;
+          if (!isDeleting && charIdx === currentWord.length) {
+            isDeleting = true;
+            speed = 2000; // Pause at end
+          } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            wordIdx = (wordIdx + 1) % words.length;
+            speed = 500;
+          }
+          setTimeout(type, speed);
+        };
+        if (textEl) type();
+
+        // --- 3. Optimized Counter Animation ---
+        const animate = (el, end, suffix) => {
+          let start = 0;
+          const duration = 2000;
+          const startTime = performance.now();
+
+          const update = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const value = progress * end;
+            el.textContent =
+              (end % 1 === 0
+                ? Math.floor(value).toLocaleString()
+                : value.toFixed(1)) + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+          };
+          requestAnimationFrame(update);
+        };
+
+        // Trigger counters when they enter the viewport
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (entry.target.id === "stat-1")
+                  animate(entry.target, 5, "M+");
+                if (entry.target.id === "stat-2")
+                  animate(entry.target, 99.4, "%");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+
+        document
+          .querySelectorAll("[id^='stat-']")
+          .forEach((s) => observer.observe(s));
+      });
+    </script>
+  </body>
+</html>

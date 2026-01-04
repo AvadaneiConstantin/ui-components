@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transparent Absolute Navbar</title>
+    <meta
+      name="description"
+      content="A transparent, absolutely positioned navigation bar suitable for Hero sections."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Ensures smooth transitions for interactive elements */
+      .transition-colors-hover {
+        transition: color 0.3s ease, background-color 0.3s ease;
+      }
+      /* Mobile Menu Styles (Full Overlay) */
+      #mobile-menu-integrated {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 49;
+        padding-top: 5rem;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      /* State for hidden menu */
+      .menu-closed {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* State for open menu */
+      .menu-open {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Custom colors for CTA/hover consistency
+              sky: { 600: "#0284c7", 700: "#0369a1" },
+            },
+          },
+        },
+      };
+    </script>
+
+    <nav class="fixed top-0 left-0 w-full z-50 transition-colors-hover">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <a href="#" class="flex items-center gap-3">
+            <span
+              class="font-extrabold text-2xl text-white tracking-wide shadow-sm"
+              >Logo</span
+            >
+          </a>
+
+          <div class="hidden md:flex flex-1 justify-center space-x-8">
+            <a
+              href="#"
+              class="text-white font-medium transition-colors-hover hover:text-sky-300 px-3 py-2 rounded-md"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              class="text-white font-medium transition-colors-hover hover:text-sky-300 px-3 py-2 rounded-md"
+            >
+              Services
+            </a>
+            <a
+              href="#"
+              class="text-white font-medium transition-colors-hover hover:text-sky-300 px-3 py-2 rounded-md"
+            >
+              About
+            </a>
+            <a
+              href="#"
+              class="text-white font-medium transition-colors-hover hover:text-sky-300 px-3 py-2 rounded-md"
+            >
+              Career
+            </a>
+          </div>
+
+          <div class="hidden md:block">
+            <a
+              href="#"
+              class="px-5 py-2 text-sm font-semibold rounded-full text-sky-600 bg-white hover:bg-gray-100 transition-colors-hover shadow-xl transform hover:scale-[1.02]"
+            >
+              Contact
+            </a>
+          </div>
+
+          <button
+            id="nav-toggle-integrated"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            class="md:hidden p-2 rounded-full text-white focus:outline-none focus:ring-2 focus:ring-white transition-colors-hover z-50"
+          >
+            <svg
+              id="icon-open"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+            <svg
+              id="icon-close"
+              class="w-6 h-6 hidden"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu-integrated"
+        class="menu-closed md:hidden bg-gray-900/90 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="nav-toggle-integrated"
+      >
+        <div class="max-w-7xl mx-auto px-4 py-4 space-y-2">
+          <a
+            href="#"
+            class="block px-3 py-3 text-lg font-medium text-white hover:bg-gray-800 rounded-lg transition-colors-hover"
+          >
+            Home
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-3 text-lg font-medium text-white hover:bg-gray-800 rounded-lg transition-colors-hover"
+          >
+            Services
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-3 text-lg font-medium text-white hover:bg-gray-800 rounded-lg transition-colors-hover"
+          >
+            About
+          </a>
+          <a
+            href="#"
+            class="block px-3 py-3 text-lg font-medium text-white hover:bg-gray-800 rounded-lg transition-colors-hover"
+          >
+            Career
+          </a>
+
+          <a
+            href="/contact"
+            class="block text-center mt-4 px-4 py-3 text-lg font-semibold rounded-full text-sky-600 bg-white hover:bg-gray-100 transition-colors-hover shadow-md"
+          >
+            Contact
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="relative h-screen bg-cover bg-center flex items-center justify-center overflow-hidden"
+      style="background-image: url('https://picsum.photos/1920/1080?random=1')"
+    >
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <h1
+        class="text-6xl sm:text-7xl font-extrabold text-white text-center p-4 z-10 [text-shadow:_0_4px_8px_rgb(0_0_0_/_50%)]"
+      >
+        Start Your Project
+      </h1>
+    </div>
+
+    <script>
+      // --- DOM Elements ---
+      const navToggle = document.getElementById("nav-toggle-integrated");
+      const mobileMenu = document.getElementById("mobile-menu-integrated");
+      // const closeMenuButton = document.getElementById("close-menu-integrated"); // Removed, the toggle button handles both
+
+      // --- Toggle Functionality (Simplified) ---
+      if (navToggle && mobileMenu) {
+        /**
+         * Toggles the mobile menu state (open/closed).
+         */
+        function toggleMobileMenu() {
+          const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
+
+          if (isExpanded) {
+            // Close Menu
+            mobileMenu.classList.add("menu-closed");
+            mobileMenu.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+          } else {
+            // Open Menu
+            mobileMenu.classList.add("menu-open");
+            mobileMenu.classList.remove("menu-closed");
+            navToggle.setAttribute("aria-expanded", "true");
+          }
+        }
+
+        // --- Event Listeners ---
+
+        // 1. Toggle when the burger/close button is clicked
+        navToggle.addEventListener("click", toggleMobileMenu);
+
+        // 2. Close the menu when any link is clicked inside the menu
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            // Check if the menu is open before closing it
+            if (mobileMenu.classList.contains("menu-open")) {
+              toggleMobileMenu();
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

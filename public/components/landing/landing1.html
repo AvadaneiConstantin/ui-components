@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Platform – Start Building Today | Component Showcase</title>
+
+    <meta
+      name="description"
+      content="Modern landing page with gradient overlay and clear CTAs"
+    />
+    <meta
+      name="keywords"
+      content="saas, landing, hero, component, ui, design, tailwindcss, accessibility"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* Ensure the background image path is correct in your setup */
+      .hero-bg {
+        background-image: url("/img/exp3.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+      /* Responsive adjustment for mobile performance */
+      @media (max-width: 768px) {
+        .hero-bg {
+          background-attachment: scroll;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <main role="main">
+      <section
+        class="hero-bg relative h-screen /* Dimensions & Layout */ flex items-center justify-center /* Layout */ text-center /* Typography */"
+        role="banner"
+        aria-label="SaaS platform hero section"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/60"
+        ></div>
+
+        <div
+          class="relative z-10 w-full max-w-3xl /* Dimensions */ px-4 mx-auto py-12 /* Spacing */ flex flex-col items-center justify-center /* Layout */"
+        >
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-normal"
+          >
+            Start
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400"
+            >
+              Building
+            </span>
+            the Future
+          </h1>
+
+          <p
+            class="text-lg md:text-xl text-gray-200 /* Typography & Color */ mb-10 max-w-2xl mx-auto leading-relaxed /* Spacing */"
+          >
+            Our all-in-one platform helps teams collaborate efficiently and
+            deliver insights in real time.
+          </p>
+
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center /* Layout */ mb-10 /* Spacing */"
+            role="group"
+            aria-label="Call to action buttons"
+          >
+            <a
+              href="#"
+              data-action="get-started"
+              class="px-5 py-2 rounded-lg font-semibold text-lg shadow-xl /* Dimensions & Style */ bg-blue-600 text-white /* Colors */ hover:bg-blue-700 hover:shadow-2xl /* Hover */ transition-all duration-300 hover:-translate-y-1 /* Animation */ focus:outline-none focus:ring-4 focus:ring-blue-500/50 /* Focus */"
+              aria-label="Get started for free"
+            >
+              Get Started Free
+            </a>
+            <a
+              href="#"
+              data-action="watch-demo"
+              class="px-5 py-2 rounded-lg font-semibold text-lg /* Dimensions & Style */ bg-transparent border-2 border-white/50 text-white /* Colors */ hover:bg-white/10 /* Hover */ transition-colors duration-300 /* Animation */ focus:outline-none focus:ring-4 focus:ring-white/50 /* Focus */"
+              aria-label="Watch demo video"
+            >
+              Watch Demo
+            </a>
+          </div>
+
+          <p
+            class="text-gray-300 text-sm"
+            aria-label="Free trial information, no credit card required"
+          >
+            No credit card required · Cancel anytime
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1. Handle all clicks on elements with data-action
+        document.addEventListener("click", function (e) {
+          const element = e.target.closest("[data-action]");
+
+          if (element) {
+            // Prevent default link/button action
+            e.preventDefault();
+
+            const action = element.getAttribute("data-action");
+
+            // Optional: simple visual feedback
+            addClickEffect(element);
+          }
+        });
+
+        // Helper function for click effect
+        function addClickEffect(element) {
+          element.classList.add("scale-95");
+          element.classList.add("transition-transform");
+          setTimeout(() => element.classList.remove("scale-95"), 200);
+        }
+
+        // Add simple animation styles for click effect
+        const style = document.createElement("style");
+        style.textContent = `
+        .scale-95 { transform: scale(0.95); }
+        .transition-transform { transition: transform 0.2s ease; }
+      `;
+        document.head.appendChild(style);
+      });
+    </script>
+  </body>
+</html>

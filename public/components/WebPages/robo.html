@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboNovaTech | Next-Gen Human-Robot Collaboration</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      :root {
+        --neon-cyan: #00f3ff;
+        --ai-green: #00ff88;
+        --tech-blue: #0066ff;
+        --robot-red: #ff0055;
+        --cyber-purple: #b967ff;
+        --dark-space: #0a0a1a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--dark-space);
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      .tech-font {
+        font-family: "Orbitron", sans-serif;
+        font-weight: 700;
+      }
+
+      /* Glass Morphism */
+      .glass-card {
+        background: rgba(16, 16, 30, 0.7);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+      }
+
+      /* Gradient Text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--neon-cyan),
+          var(--ai-green),
+          var(--cyber-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Futuristic Button */
+      .futuristic-btn {
+        position: relative;
+        padding: 16px 32px;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        background: rgba(0, 102, 255, 0.1);
+        border: 1px solid rgba(0, 243, 255, 0.3);
+        color: var(--neon-cyan);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        border-radius: 8px;
+      }
+
+      .futuristic-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 243, 255, 0.2),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .futuristic-btn:hover {
+        background: rgba(0, 102, 255, 0.2);
+        box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .futuristic-btn:hover::before {
+        left: 100%;
+      }
+
+      /* Particle Background */
+      .particle-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--neon-cyan);
+        animation: particleFloat linear infinite;
+      }
+
+      @keyframes particleFloat {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.7;
+        }
+        90% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      /* Scan Line Effect */
+      .scan-line {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scan-line::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--ai-green),
+          transparent
+        );
+        animation: scan 3s linear infinite;
+      }
+
+      @keyframes scan {
+        0% {
+          top: 0;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      /* Holographic Effect */
+      .hologram {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hologram::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(0, 243, 255, 0.1),
+          rgba(0, 255, 136, 0.1),
+          transparent
+        );
+        transform: rotate(45deg);
+        animation: hologramMove 6s linear infinite;
+      }
+
+      @keyframes hologramMove {
+        0% {
+          transform: translateX(-100%) rotate(45deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(45deg);
+        }
+      }
+
+      /* Floating Animation */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(5, 5, 16, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        padding-top: 80px;
+        overflow-y: auto;
+      }
+
+      .mobile-menu.active {
+        right: 0;
+      }
+
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Logo Styling */
+      .logo-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .logo-img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .glass-card {
+          backdrop-filter: blur(10px);
+        }
+
+        .futuristic-btn {
+          padding: 12px 24px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900">
+    <!-- Particle Background -->
+    <div class="particle-bg" id="particles"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="flex flex-col px-8 space-y-6">
+        <a
+          href="#hero"
+          class="text-gray-300 hover:text-cyan-400 text-lg font-medium py-2 border-b border-gray-800"
+        >
+          Home
+        </a>
+        <a
+          href="#solutions"
+          class="text-gray-300 hover:text-cyan-400 text-lg font-medium py-2 border-b border-gray-800"
+        >
+          Solutions
+        </a>
+        <a
+          href="#technology"
+          class="text-gray-300 hover:text-cyan-400 text-lg font-medium py-2 border-b border-gray-800"
+        >
+          Technology
+        </a>
+        <a
+          href="#impact"
+          class="text-gray-300 hover:text-cyan-400 text-lg font-medium py-2 border-b border-gray-800"
+        >
+          Impact
+        </a>
+        <a
+          href="#contact"
+          class="text-gray-300 hover:text-cyan-400 text-lg font-medium py-2 border-b border-gray-800"
+        >
+          Contact
+        </a>
+        <button class="futuristic-btn mt-8">
+          <i class="fas fa-user-astronaut mr-2"></i>Get Demo
+        </button>
+      </nav>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 py-3 px-4 md:px-6 bg-gray-900/60 backdrop-blur-md border-b border-gray-800"
+    >
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <!-- Logo Image -->
+          <img
+            src="../..//img/roboLogo.png"
+            alt="RoboNovaTech Logo"
+            class="logo-img"
+          />
+
+          <!-- Company Name -->
+          <div class="tech-font text-2xl font-bold gradient-text">
+            RoboNovaTech
+          </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a
+            href="#hero"
+            class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
+          >
+            Home
+          </a>
+          <a
+            href="#solutions"
+            class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
+          >
+            Solutions
+          </a>
+          <a
+            href="#technology"
+            class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
+          >
+            Technology
+          </a>
+          <a
+            href="#impact"
+            class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
+          >
+            Impact
+          </a>
+          <a
+            href="#contact"
+            class="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
+          >
+            Contact
+          </a>
+          <button class="futuristic-btn">
+            <i class="fas fa-user-astronaut mr-2"></i>Get Demo
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="md:hidden text-cyan-400 text-2xl p-2" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Background Image -->
+    <section
+      id="hero"
+      class="min-h-screen relative flex items-center justify-center pt-16"
+    >
+      <!-- Background Image Container -->
+      <div class="absolute inset-0 z-0">
+        <div
+          class="w-full h-full bg-gradient-to-br from-blue-200/30 via-purple-900/20 to-cyan-900/30"
+        >
+          <div
+            class="w-full h-full bg-[url('../../img/robo3d.png')] bg-cover bg-center opacity-20"
+          ></div>
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/30 to-transparent"
+        ></div>
+      </div>
+
+      <div
+        class="container mx-auto px-6 relative z-10 text-center"
+        data-aos="fade-up"
+      >
+        <div class="max-w-4xl mx-auto">
+          <h1 id="main-title" class="text-5xl md:text-7xl font-bold mb-6">
+            <span class="gradient-text">Human-Robot</span>
+            <br />
+            <span class="text-white">Synergy Redefined</span>
+          </h1>
+
+          <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Next-generation autonomous companions that learn, adapt, and assist
+            humans through intuitive AI and empathetic technology.
+          </p>
+
+          <div class="flex flex-col md:flex-row gap-6 justify-center">
+            <button class="futuristic-btn text-lg px-10 py-4">
+              <i class="fas fa-play-circle mr-3"></i>Watch Demo
+            </button>
+            <button
+              class="futuristic-btn text-lg px-10 py-4 border-green-500 text-green-400 hover:bg-green-900/20"
+            >
+              <i class="fas fa-brain mr-3"></i>Explore AI
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <div
+          class="w-6 h-10 border-2 border-cyan-500 rounded-full flex justify-center"
+        >
+          <div
+            class="w-1 h-3 bg-cyan-500 rounded-full mt-2 animate-bounce"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="py-24 bg-gray-900/50 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="gradient-text">Intelligent Robotic</span>
+            <span class="text-white"> Solutions</span>
+          </h2>
+          <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+            Specialized robots designed for seamless human interaction and
+            assistance
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Solution 1 -->
+          <div
+            class="glass-card p-8 hover:border-cyan-500/50 transition-all duration-300"
+            data-aos="zoom-in"
+          >
+            <div class="text-5xl text-cyan-400 mb-6 float-animation">
+              <i class="fas fa-hand-holding-medical"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">
+              Healthcare Assistant
+            </h3>
+            <p class="text-gray-400 mb-6">
+              AI-powered medical robots with real-time diagnostics, patient
+              monitoring, and emergency response capabilities.
+            </p>
+            <div
+              class="scan-line h-1 bg-gradient-to-r from-cyan-500 to-green-500 rounded-full"
+            ></div>
+          </div>
+
+          <!-- Solution 2 -->
+          <div
+            class="glass-card p-8 hover:border-green-500/50 transition-all duration-300"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <div
+              class="text-5xl text-green-400 mb-6 float-animation"
+              style="animation-delay: 1s"
+            >
+              <i class="fas fa-home"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">Home Companion</h3>
+            <p class="text-gray-400 mb-6">
+              Emotion-aware domestic robots providing companionship, household
+              management, and elderly care.
+            </p>
+            <div
+              class="scan-line h-1 bg-gradient-to-r from-green-500 to-purple-500 rounded-full"
+            ></div>
+          </div>
+
+          <!-- Solution 3 -->
+          <div
+            class="glass-card p-8 hover:border-purple-500/50 transition-all duration-300"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            <div
+              class="text-5xl text-purple-400 mb-6 float-animation"
+              style="animation-delay: 2s"
+            >
+              <i class="fas fa-industry"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">
+              Industrial Partner
+            </h3>
+            <p class="text-gray-400 mb-6">
+              Collaborative factory robots with predictive maintenance and
+              autonomous problem-solving abilities.
+            </p>
+            <div
+              class="scan-line h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology Showcase -->
+    <section id="technology" class="py-24 relative">
+      <!-- Background Image for Technology -->
+      <div class="absolute inset-0 z-0">
+        <div
+          class="w-full h-full bg-[url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=2000')] bg-cover bg-center opacity-10"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+              <span class="text-white">Next-Gen</span>
+              <br />
+              <span class="gradient-text">Robotic Intelligence</span>
+            </h2>
+
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="text-cyan-400 text-2xl mr-4 mt-1">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-white mb-2">
+                    Adaptive Neural Networks
+                  </h4>
+                  <p class="text-gray-400">
+                    Self-learning AI that evolves with human interaction
+                    patterns
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="text-green-400 text-2xl mr-4 mt-1">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-white mb-2">
+                    360° Perception
+                  </h4>
+                  <p class="text-gray-400">
+                    Advanced computer vision with environmental awareness
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="text-purple-400 text-2xl mr-4 mt-1">
+                  <i class="fas fa-hands-helping"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-white mb-2">
+                    Empathetic Interface
+                  </h4>
+                  <p class="text-gray-400">
+                    Emotion recognition and natural communication systems
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="hologram rounded-2xl overflow-hidden"
+            data-aos="fade-left"
+          >
+            <div
+              class="h-[500px] bg-cover bg-center flex flex-col justify-end p-8"
+              style="background-image: url('../..//img/robo3d.png')"
+            >
+              <div class="text-center">
+                <div class="text-8xl text-cyan-400 mb-4"></div>
+                <p class="text-gray-300">3D Technology</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-24 bg-gray-900/80">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Transforming</span>
+            <span class="gradient-text"> Human Lives</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center" data-aos="fade-up">
+            <div class="text-5xl font-bold text-cyan-400 mb-4">98%</div>
+            <p class="text-gray-300">Patient Satisfaction</p>
+          </div>
+
+          <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-5xl font-bold text-green-400 mb-4">24/7</div>
+            <p class="text-gray-300">Active Assistance</p>
+          </div>
+
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-5xl font-bold text-purple-400 mb-4">10K+</div>
+            <p class="text-gray-300">Lives Impacted</p>
+          </div>
+
+          <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-5xl font-bold text-red-400 mb-4">99.9%</div>
+            <p class="text-gray-300">Safety Record</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 relative">
+      <div class="absolute inset-0 z-0">
+        <div
+          class="w-full h-full bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-gray-900"
+        ></div>
+      </div>
+
+      <div
+        class="container mx-auto px-6 relative z-10 text-center"
+        data-aos="zoom-in"
+      >
+        <div class="max-w-3xl mx-auto glass-card p-12">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">
+            <span class="gradient-text">Join the</span>
+            <span class="text-white"> Revolution</span>
+          </h2>
+
+          <p class="text-xl text-gray-300 mb-10">
+            Be part of the future where humans and robots work together for a
+            better world.
+          </p>
+
+          <form class="space-y-6 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Your Email Address"
+              class="w-full p-4 glass-card border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:border-cyan-500 focus:outline-none"
+            />
+            <button class="futuristic-btn w-full text-lg py-4">
+              <i class="fas fa-paper-plane mr-3"></i>Request Early Access
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <!-- Logo Image -->
+            <img
+              src="../..//img/roboLogo.png"
+              alt="RoboNovaTech Logo"
+              class="logo-img"
+            />
+
+            <!-- Company Name -->
+            <div class="tech-font text-2xl font-bold gradient-text">
+              RoboNovaTech
+            </div>
+          </div>
+          <div class="flex space-x-6 mb-6 md:mb-0">
+            <a href="#" class="text-gray-400 hover:text-cyan-400 text-xl">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-cyan-400 text-xl">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-cyan-400 text-xl">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-cyan-400 text-xl">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+
+          <div class="text-gray-500 text-sm text-center md:text-right">
+            <p>© 2026 RoboNovaTech. Redefining Human-Robot Collaboration.</p>
+            <p class="mt-2">All systems operational. AI models online.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+
+      // Mobile Menu Functionality
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileOverlay = document.getElementById("mobileOverlay");
+
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle("active");
+        mobileOverlay.classList.toggle("active");
+        document.body.style.overflow = mobileMenu.classList.contains("active")
+          ? "hidden"
+          : "";
+
+        // Change icon
+        const icon = menuToggle.querySelector("i");
+        if (mobileMenu.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      }
+
+      menuToggle.addEventListener("click", toggleMobileMenu);
+      mobileOverlay.addEventListener("click", toggleMobileMenu);
+
+      // Close mobile menu when clicking on links
+      document.querySelectorAll("#mobileMenu a").forEach((link) => {
+        link.addEventListener("click", toggleMobileMenu);
+      });
+
+      // Create particles
+      function createParticles() {
+        const container = document.getElementById("particles");
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+
+          const size = Math.random() * 4 + 1;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${Math.random() * 100}vw`;
+          particle.style.top = `${Math.random() * 100}vh`;
+
+          const duration = 15 + Math.random() * 15;
+          particle.style.animation = `particleFloat ${duration}s linear infinite`;
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+
+          const colors = ["#00f3ff", "#00ff88", "#b967ff", "#0066ff"];
+          particle.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+          container.appendChild(particle);
+        }
+      }
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 50) {
+          nav.classList.add("bg-gray-900/95");
+          nav.classList.add("backdrop-blur-lg");
+        } else {
+          nav.classList.remove("bg-gray-900/95");
+          nav.classList.remove("backdrop-blur-lg");
+        }
+      });
+
+      // Initialize on load
+      document.addEventListener("DOMContentLoaded", () => {
+        createParticles();
+
+        // Fix card hover effect - remove scaling
+        document.querySelectorAll(".glass-card").forEach((card) => {
+          card.addEventListener("mouseenter", () => {
+            card.style.transform = "translateY(-4px)";
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "translateY(0)";
+          });
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 768) {
+            mobileMenu.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+            document.body.style.overflow = "";
+            const icon = menuToggle.querySelector("i");
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

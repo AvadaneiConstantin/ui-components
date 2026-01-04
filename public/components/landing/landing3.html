@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Platform - Video Hero</title>
+
+    <meta
+      name="description"
+      content="A high-impact hero section with a seamless video background and clear Call to Action."
+    />
+    <meta
+      name="keywords"
+      content="video, hero, saas, cta, tailwind, performance"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .video-hero-section {
+        height: 100vh;
+      }
+
+      .btn-primary-glow {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .btn-primary-glow:hover {
+        box-shadow: 0 10px 20px rgba(239, 68, 68, 0.6); /* Red-500 glow */
+        transform: translateY(-2px);
+      }
+      .dark .btn-primary-glow {
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); /* Red-500 glow dark */
+      }
+      @media (min-width: 768px) {
+        .video-hero-section {
+          height: 100vh;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <main role="main">
+      <section
+        id="hero-section"
+        class="relative video-hero-section flex items-center justify-center overflow-hidden"
+        role="banner"
+        aria-label="High-impact hero section with video background"
+      >
+        <video
+          id="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          class="absolute z-0 w-full h-full object-cover"
+          aria-hidden="true"
+          poster="https://placehold.co/1920x1080/1f2937/ffffff?text=Static+Poster"
+          onerror="document.getElementById('hero-section').classList.add('bg-cover', 'bg-center'); document.getElementById('hero-section').style.backgroundImage = 'url(https://placehold.co/1920x1080/1f2937/ffffff?text=Static+Fallback+Image)'; this.remove();"
+        >
+          <source src="../..//video/hero.mp4" type="video/mp4" />
+        </video>
+
+        <div
+          class="absolute z-10 w-full h-full bg-black/60 dark:bg-black/70"
+        ></div>
+
+        <div
+          class="relative z-20 max-w-4xl mx-auto px-4 text-center text-white"
+        >
+          <h1
+            class="text-5xl md:text-7xl font-black mb-4 tracking-tighter leading-tight"
+            aria-label="Experience the difference in digital interaction"
+          >
+            Experience the
+            <span class="text-red-400">Difference</span>
+          </h1>
+          <p
+            class="text-xl opacity-90 mb-10 max-w-xl mx-auto"
+            id="hero-tagline"
+          >
+            Discover a new dimension of online engagement, built for the speed
+            and clarity you need.
+          </p>
+
+          <a
+            href="#"
+            class="btn-primary-glow px-10 py-3.5 text-lg font-bold rounded-xl text-white bg-red-600 hover:bg-red-700 transition duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+            aria-label="Explore the platform now"
+            aria-describedby="hero-tagline"
+          >
+            Explore Now
+          </a>
+
+          <p class="mt-8 text-sm text-gray-200 opacity-80" role="presentation">
+            No credit card required. Cancel anytime.
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

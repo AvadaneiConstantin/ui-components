@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jonathan Archer | Bestselling Author</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              midnight: "#1e3a5f",
+              gold: "#d4af37",
+              charcoal: "#2c3e50",
+              forest: "#2d5a27",
+            },
+            fontFamily: {
+              serif: ["Crimson Pro", "serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              typing: {
+                from: { width: "0" },
+                to: { width: "100%" },
+              },
+              "blink-caret": {
+                "from, to": { "border-color": "transparent" },
+                "50%": { "border-color": "#d4af37" },
+              },
+            },
+            animation: {
+              float: "float 3s ease-in-out infinite",
+              typewriter:
+                "typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .book-cover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+          0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: perspective(1000px) rotateY(-5deg);
+        transition: transform 0.3s ease;
+      }
+
+      .book-cover:hover {
+        transform: perspective(1000px) rotateY(0deg) scale(1.02);
+      }
+
+      .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+
+      .mobile-menu.open {
+        max-height: 500px;
+      }
+
+      .hover-lift {
+        transition: all 0.3s ease;
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-4px);
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-[#f8f5f0] text-charcoal font-sans min-h-screen dark:bg-gray-900 dark:text-gray-100"
+  >
+    <script>
+      // Initialize dark mode from localStorage or system preference
+      if (
+        localStorage.getItem("darkMode") === "true" ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+          !localStorage.getItem("darkMode"))
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+
+      // Toggle dark mode
+      function toggleDark() {
+        document.documentElement.classList.toggle("dark");
+        localStorage.setItem(
+          "darkMode",
+          document.documentElement.classList.contains("dark")
+        );
+      }
+
+      // Toggle mobile menu
+      function toggleMenu() {
+        const menu = document.getElementById("mobileMenu");
+        const icon = document.getElementById("menuIcon");
+        menu.classList.toggle("open");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      }
+    </script>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-white/40 dark:bg-gray-900/95 backdrop-blur-md border-b border-gold/20 shadow-lg"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-midnight to-gold rounded-lg flex items-center justify-center shadow-lg"
+            >
+              <i class="fas fa-pen-nib text-white text-lg"></i>
+            </div>
+            <span
+              class="font-serif text-2xl font-bold text-midnight dark:text-gold"
+              >Jonathan Archer</span
+            >
+          </div>
+
+          <!-- Desktop Menu with hover effect -->
+          <div class="hidden md:flex items-center space-x-10">
+            <a
+              href="#home"
+              class="text-sm font-medium text-charcoal dark:text-gray-300 hover:text-gold transition-colors relative group"
+            >
+              Home
+              <span
+                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#books"
+              class="text-sm font-medium text-charcoal dark:text-gray-300 hover:text-gold transition-colors relative group"
+            >
+              Books
+              <span
+                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#about"
+              class="text-sm font-medium text-charcoal dark:text-gray-300 hover:text-gold transition-colors relative group"
+            >
+              Biography
+              <span
+                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#events"
+              class="text-sm font-medium text-charcoal dark:text-gray-300 hover:text-gold transition-colors relative group"
+            >
+              Events
+              <span
+                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#contact"
+              class="text-sm font-medium text-charcoal dark:text-gray-300 hover:text-gold transition-colors relative group"
+            >
+              Contact
+              <span
+                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+          </div>
+
+          <!-- Theme and Mobile Toggle -->
+          <div class="flex items-center space-x-4">
+            <button
+              onclick="toggleDark()"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors hover-lift"
+            >
+              <i class="fas fa-moon dark:hidden text-lg"></i>
+              <i class="fas fa-sun hidden dark:block text-lg"></i>
+            </button>
+            <button
+              onclick="toggleMenu()"
+              class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors hover-lift"
+            >
+              <i id="menuIcon" class="fas fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+          <div class="py-4 space-y-1">
+            <a
+              href="#home"
+              onclick="toggleMenu()"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-midnight/5 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Home</a
+            >
+            <a
+              href="#books"
+              onclick="toggleMenu()"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-midnight/5 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Books</a
+            >
+            <a
+              href="#about"
+              onclick="toggleMenu()"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-midnight/5 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Biography</a
+            >
+            <a
+              href="#events"
+              onclick="toggleMenu()"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-midnight/5 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Events</a
+            >
+            <a
+              href="#contact"
+              onclick="toggleMenu()"
+              class="block px-3 py-3 text-base font-medium text-charcoal dark:text-gray-300 hover:bg-midnight/5 dark:hover:bg-gray-800 rounded-md transition-colors"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div
+              class="inline-flex items-center px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-medium mb-6"
+            >
+              <i class="fas fa-award mr-2"></i> Pulitzer Prize Finalist
+            </div>
+            <h1
+              class="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-midnight dark:text-white mb-6"
+            >
+              <span class="block">Bestselling</span>
+              <span
+                class="text-gold inline-block overflow-hidden border-r-2 border-gold whitespace-nowrap animate-typewriter"
+                >Author</span
+              >
+              <span class="block">Storyteller</span>
+            </h1>
+            <p class="text-lg text-charcoal dark:text-gray-300 mb-8 max-w-xl">
+              Jonathan Archer crafts literary masterpieces that explore human
+              experience.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#books"
+                class="px-8 py-4 bg-gradient-to-r from-midnight to-forest text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover-lift"
+              >
+                <i class="fas fa-book-open mr-2"></i>Explore Books
+              </a>
+              <a
+                href="#contact"
+                class="px-8 py-4 border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold/5 transition-all duration-300 hover-lift"
+              >
+                <i class="fas fa-envelope mr-2"></i>Book Inquiry
+              </a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="book-cover w-full max-w-md mx-auto">
+              <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                <div
+                  class="h-[500px] bg-cover bg-center flex flex-col justify-end p-8"
+                  style="background-image: url('../..//img/haunted.png')"
+                >
+                  <div class="p-6 rounded-xl">
+                    <h3 class="font-serif text-2xl font-bold text-white mb-2">
+                      "The Silent Valley"
+                    </h3>
+                    <p class="text-gold font-medium mb-3">
+                      New York Times Bestseller • 2023
+                    </p>
+                    <p class="text-white text-sm mb-4">
+                      A haunting exploration of memory and loss in the
+                      Appalachian mountains.
+                    </p>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium text-white"
+                        >★★★★★ 4.9/5</span
+                      >
+                      <span
+                        class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full"
+                        >National Book Award</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute -bottom-6 -right-6 w-24 h-24 bg-gold rounded-full flex items-center justify-center text-white text-3xl shadow-xl animate-float"
+              >
+                <i class="fas fa-trophy"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Books Section -->
+    <section
+      id="books"
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2
+            class="font-serif text-4xl sm:text-5xl font-bold text-midnight dark:text-white mb-4"
+          >
+            Published Works
+          </h2>
+          <p class="text-lg text-charcoal dark:text-gray-300 max-w-2xl mx-auto">
+            Critically acclaimed novels that have captivated readers worldwide.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Book 1 with hover effect -->
+          <div
+            class="bg-gradient-to-br from-midnight/10 to-forest/10 dark:from-gray-700/50 dark:to-gray-600/50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div
+              class="w-16 h-16 bg-gold rounded-lg flex items-center justify-center text-white text-2xl mb-6 shadow-lg"
+            >
+              <i class="fas fa-book"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              Whispers of the Past
+            </h3>
+            <p class="text-gold text-sm font-medium mb-4">
+              2018 • Historical Fiction
+            </p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              A multi-generational family saga exploring identity and legacy.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="text-sm font-medium">4.8/5</span>
+              </div>
+              <span
+                class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full"
+                >Booker Longlist</span
+              >
+            </div>
+          </div>
+
+          <!-- Book 2 with hover effect -->
+          <div
+            class="bg-gradient-to-br from-midnight/10 to-forest/10 dark:from-gray-700/50 dark:to-gray-600/50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div
+              class="w-16 h-16 bg-gold rounded-lg flex items-center justify-center text-white text-2xl mb-6 shadow-lg"
+            >
+              <i class="fas fa-feather-alt"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              Echoes in the Canyon
+            </h3>
+            <p class="text-gold text-sm font-medium mb-4">
+              2021 • Short Stories
+            </p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              Interconnected narratives examining love, loss, and meaning.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="text-sm font-medium">4.9/5</span>
+              </div>
+              <span
+                class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full"
+                >Story Prize</span
+              >
+            </div>
+          </div>
+
+          <!-- Book 3 with hover effect -->
+          <div
+            class="bg-gradient-to-br from-midnight/10 to-forest/10 dark:from-gray-700/50 dark:to-gray-600/50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div
+              class="w-16 h-16 bg-gold rounded-lg flex items-center justify-center text-white text-2xl mb-6 shadow-lg"
+            >
+              <i class="fas fa-anchor"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              The Last Lightkeeper
+            </h3>
+            <p class="text-gold text-sm font-medium mb-4">
+              2019 • Literary Fiction
+            </p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              A solitary lighthouse keeper confronts his past in Maine.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="text-sm font-medium">4.7/5</span>
+              </div>
+              <span
+                class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full"
+                >National Finalist</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2
+              class="font-serif text-4xl sm:text-5xl font-bold text-midnight dark:text-white mb-8"
+            >
+              Literary Journey
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="flex items-start space-x-4 hover-lift transition-all duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-university text-gold"></i>
+                </div>
+                <div>
+                  <h4
+                    class="font-serif text-xl font-bold text-midnight dark:text-white mb-1"
+                  >
+                    MFA in Creative Writing
+                  </h4>
+                  <p class="text-charcoal dark:text-gray-300">
+                    University of Iowa Writers' Workshop, 2001
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-start space-x-4 hover-lift transition-all duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-award text-gold"></i>
+                </div>
+                <div>
+                  <h4
+                    class="font-serif text-xl font-bold text-midnight dark:text-white mb-1"
+                  >
+                    PEN/Faulkner Award
+                  </h4>
+                  <p class="text-charcoal dark:text-gray-300">
+                    Awarded for "Whispers of the Past", 2019
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-start space-x-4 hover-lift transition-all duration-300"
+              >
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-globe text-gold"></i>
+                </div>
+                <div>
+                  <h4
+                    class="font-serif text-xl font-bold text-midnight dark:text-white mb-1"
+                  >
+                    International Recognition
+                  </h4>
+                  <p class="text-charcoal dark:text-gray-300">
+                    Works translated into 32 languages worldwide
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="h-[500px] bg-cover bg-center flex flex-col justify-end p-8"
+            style="background-image: url('../../img/art.png')"
+          >
+            <div class="text-white">
+              <p class="font-bold text-xl">Jonathan Archer</p>
+              <p class="text-gold text-sm">Author & Speaker</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section
+      id="events"
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-midnight/5 to-forest/5 dark:from-gray-800/50 dark:to-gray-700/50"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2
+            class="font-serif text-4xl sm:text-5xl font-bold text-midnight dark:text-white mb-4"
+          >
+            Upcoming Events
+          </h2>
+          <p class="text-lg text-charcoal dark:text-gray-300 max-w-2xl mx-auto">
+            Join Jonathan for readings, talks, and literary discussions.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Event 1 with hover effect -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-book-reader"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              Paris Literary Festival
+            </h3>
+            <p class="text-gold font-medium mb-4">March 15, 2024 • 7:00 PM</p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              Keynote speech and reading from "The Silent Valley".
+            </p>
+            <a
+              href="#"
+              class="inline-flex items-center text-gold font-medium hover:text-gold/80 transition-colors"
+            >
+              Register <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Event 2 with hover effect -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              Writer's Workshop
+            </h3>
+            <p class="text-gold font-medium mb-4">April 22, 2024 • 10:00 AM</p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              Three-day intensive workshop on character development.
+            </p>
+            <a
+              href="#"
+              class="inline-flex items-center text-gold font-medium hover:text-gold/80 transition-colors"
+            >
+              Learn More <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Event 3 with hover effect -->
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+          >
+            <div class="text-gold text-2xl mb-4">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <h3
+              class="font-serif text-2xl font-bold text-midnight dark:text-white mb-3"
+            >
+              NY Times Talk
+            </h3>
+            <p class="text-gold font-medium mb-4">May 5, 2024 • 2:00 PM</p>
+            <p class="text-charcoal dark:text-gray-300 mb-6">
+              Live interview and audience Q&A.
+            </p>
+            <a
+              href="#"
+              class="inline-flex items-center text-gold font-medium hover:text-gold/80 transition-colors"
+            >
+              Get Tickets <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="bg-gradient-to-br from-midnight to-forest rounded-3xl p-12 text-white shadow-2xl hover-lift transition-all duration-300"
+        >
+          <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold mb-6">
+              Literary Representation
+            </h2>
+            <p class="text-xl opacity-90 mb-10">
+              For speaking engagements or literary inquiries.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+              <a
+                href="mailto:representation@jonathanarcher.com"
+                class="px-10 py-4 bg-gold text-midnight font-bold rounded-xl hover:bg-gold/90 transition-all duration-300 hover-lift shadow-lg"
+              >
+                <i class="fas fa-envelope mr-3"></i>Contact Agent
+              </a>
+              <a
+                href="#"
+                class="px-10 py-4 border-2 border-white text-white rounded-xl hover:bg-white/10 transition-all duration-300 hover-lift"
+              >
+                <i class="fas fa-calendar-alt mr-3"></i>Event Inquiry
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-midnight text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="text-center text-sm opacity-60">
+          &copy; 2020 Jonathan Archer. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

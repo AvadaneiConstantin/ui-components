@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Responsive Navbar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Smooth Mobile Menu Transition */
+      #mobileMenu {
+        transition: all 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+      }
+      #mobileMenu.active {
+        max-height: 400px;
+        opacity: 1;
+        padding-bottom: 1rem;
+      }
+
+      .hero-bg {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("https://picsum.photos/1920/1080");
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 transition-colors">
+    <header class="hero-bg h-screen relative">
+      <nav
+        class="fixed top-0 w-full z-50 p-4 transition-all duration-300"
+        id="mainNav"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div
+            class="bg-white/10 backdrop-blur-md border border-white/20 dark:bg-gray-800/80 rounded-2xl px-6 py-3 flex justify-between items-center shadow-2xl"
+          >
+            <a href="#" class="text-2xl font-bold text-white tracking-tight">
+              BRAND
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+              <a
+                href="#"
+                class="text-sm font-medium text-white/90 hover:text-blue-400 transition-colors"
+                >Home</a
+              >
+              <a
+                href="#"
+                class="text-sm font-medium text-white/90 hover:text-blue-400 transition-colors"
+                >About</a
+              >
+              <a
+                href="#"
+                class="text-sm font-medium text-white/90 hover:text-blue-400 transition-colors"
+                >Services</a
+              >
+              <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition-all active:scale-95 shadow-lg"
+              >
+                Get Started
+              </button>
+            </div>
+
+            <button
+              id="menuToggle"
+              class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+            </button>
+          </div>
+
+          <div
+            id="mobileMenu"
+            class="md:hidden bg-white dark:bg-gray-800 rounded-2xl mt-2 shadow-2xl border border-gray-100 dark:border-gray-700 px-4"
+          >
+            <div class="flex flex-col gap-2 pt-4">
+              <a
+                href="#"
+                class="p-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl transition-colors"
+                >Home</a
+              >
+              <a
+                href="#"
+                class="p-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl transition-colors"
+                >About</a
+              >
+              <a
+                href="#"
+                class="p-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-xl transition-colors"
+                >Services</a
+              >
+              <button
+                class="w-full bg-blue-600 text-white p-3 rounded-xl font-bold mt-2 shadow-lg"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div
+        class="h-full flex flex-col items-center justify-center text-center px-4"
+      >
+        <h1
+          class="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-lg"
+        >
+          Modern <span class="text-blue-400">Design</span>
+        </h1>
+        <p class="text-xl text-gray-200 max-w-2xl drop-shadow-md">
+          A lightweight, fully responsive navigation component with a frosted
+          glass effect and optimized mobile behavior.
+        </p>
+      </div>
+    </header>
+
+    <section class="py-20 max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold dark:text-white mb-4">Content Title</h2>
+      <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+        Scroll down to see the navigation bar maintain its frosted glass effect.
+        This template is designed for high-conversion landing pages.
+      </p>
+    </section>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuIcon = document.getElementById("menuIcon");
+      const mainNav = document.getElementById("mainNav");
+
+      // Toggle Mobile Menu
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("active");
+
+        // Toggle Icon (Bars to X)
+        menuIcon.classList.toggle("fa-bars", !isOpen);
+        menuIcon.classList.toggle("fa-xmark", isOpen);
+
+        // Visual feedback on button
+        menuToggle.classList.add("scale-90");
+        setTimeout(() => menuToggle.classList.remove("scale-90"), 150);
+      });
+
+      // Sticky Navbar background effect on scroll
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          mainNav.classList.add("py-2"); // Shrink padding on scroll
+        } else {
+          mainNav.classList.remove("py-2");
+        }
+      });
+
+      // Close menu on click outside
+      document.addEventListener("click", (e) => {
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.remove("active");
+          menuIcon.classList.add("fa-bars");
+          menuIcon.classList.remove("fa-xmark");
+        }
+      });
+
+      // Close menu on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          mobileMenu.classList.remove("active");
+          menuIcon.classList.add("fa-bars");
+          menuIcon.classList.remove("fa-xmark");
+        }
+      });
+    </script>
+  </body>
+</html>

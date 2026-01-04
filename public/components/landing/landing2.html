@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design Tool Platform | Component Showcase</title>
+
+    <meta
+      name="description"
+      content="Modern design tool platform with collaboration features and dark mode support."
+    />
+    <meta
+      name="keywords"
+      content="design, tool, saas, collaboration, prototype, ui, tailwindcss, accessibility"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+    </style>
+  </head>
+  <body class="bg-white dark:bg-gray-900 min-h-screen">
+    <main role="main">
+      <section
+        class="py-16 md:py-24 px-4"
+        role="banner"
+        aria-label="Design tool platform introduction"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-in">
+              <h1
+                class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight"
+              >
+                Your
+                <span
+                  class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 block md:inline"
+                  >All-in-One</span
+                >
+                Design Tool
+              </h1>
+
+              <p
+                class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed"
+                id="hero-description"
+              >
+                From prototypes to production-ready code, streamline your
+                workflow with powerful collaboration features.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-8" role="list">
+                <span
+                  role="listitem"
+                  class="px-3 py-1 rounded-full text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 font-medium"
+                >
+                  Prototype to Code
+                </span>
+                <span
+                  role="listitem"
+                  class="px-3 py-1 rounded-full text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 font-medium"
+                >
+                  Real-time Collaboration
+                </span>
+                <span
+                  role="listitem"
+                  class="px-3 py-1 rounded-full text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 font-medium"
+                >
+                  Design Systems
+                </span>
+              </div>
+
+              <div
+                class="flex flex-col sm:flex-row gap-4 mb-8"
+                role="group"
+                aria-label="Call to action buttons for download and demo"
+              >
+                <a
+                  href="#"
+                  class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 text-white px-8 py-4 rounded-lg font-semibold text-center transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  aria-label="Start free download of the design tool"
+                  aria-describedby="hero-description"
+                >
+                  Start Free Download
+                </a>
+                <a
+                  href="#"
+                  class="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-8 py-4 rounded-lg font-semibold text-center transition-colors duration-300 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  aria-label="Watch a live demo of the design tool"
+                  aria-describedby="hero-description"
+                >
+                  Watch Live Demo
+                </a>
+              </div>
+
+              <div
+                class="text-sm text-gray-500 dark:text-gray-400"
+                aria-label="Customer trust indicators"
+              >
+                <span role="presentation">4.9/5 from 2,000+ teams</span>
+                <span class="mx-2" aria-hidden="true">•</span>
+                <span role="presentation">No credit card required</span>
+              </div>
+            </div>
+
+            <div class="relative animate-fade-in">
+              <div
+                class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-2xl aspect-video w-full h-full"
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-center text-white p-8 opacity-70"
+                  aria-hidden="true"
+                >
+                  <div>
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h2 class="text-xl font-bold mb-2">
+                      Design Tool Interface
+                    </h2>
+                    <p>Modern dashboard visualization</p>
+                  </div>
+                </div>
+
+                <img
+                  src="/img/255.png"
+                  alt="A clean mockup of the design tool interface showing real-time collaboration features"
+                  class="absolute inset-0 w-full h-full rounded-2xl object-cover transition-opacity duration-500"
+                  loading="lazy"
+                />
+              </div>
+
+              <div
+                class="absolute -top-4 -right-4 w-20 h-20 bg-blue-500/10 rounded-2xl blur-xl"
+                aria-hidden="true"
+              ></div>
+              <div
+                class="absolute -bottom-4 -left-4 w-24 h-24 bg-purple-500/10 rounded-2xl blur-xl"
+                aria-hidden="true"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

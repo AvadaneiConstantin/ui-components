@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus Vision - AI Image & Video Content Creation</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#8b5cf6",
+              dark: {
+                bg: "#0f172a",
+                card: "#1e293b",
+              },
+              light: {
+                bg: "#ffffff",
+                card: "#f1f5f9",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .gradient-bg {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      }
+
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2);
+      }
+
+      .dark .card-hover:hover {
+        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3);
+      }
+
+      .tab-active {
+        background-color: white;
+        color: #6366f1;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      }
+
+      .dark .tab-active {
+        background-color: #1e293b;
+        color: #8b5cf6;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      }
+
+      .theme-transition {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .mobile-menu.open {
+        max-height: 500px;
+      }
+
+      /* Clase specifice pentru a evita conflictele */
+      .nv-nav-link {
+        color: #6b7280;
+        transition: color 0.3s ease;
+      }
+
+      .dark .nv-nav-link {
+        color: #d1d5db;
+      }
+
+      .nv-nav-link:hover {
+        color: #6366f1;
+      }
+
+      .dark .nv-nav-link:hover {
+        color: #8b5cf6;
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans bg-light-bg text-gray-800 dark:bg-dark-bg dark:text-gray-200 theme-transition"
+  >
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-dark-card shadow-sm py-4 sticky top-0 z-50">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <div
+            class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center"
+          >
+            <i class="fas fa-eye text-white text-sm"></i>
+          </div>
+          <span
+            class="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+          >
+            Nexus Vision
+          </span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="nv-nav-link font-medium">Home</a>
+          <a href="#features" class="nv-nav-link">Features</a>
+          <a href="#editor" class="nv-nav-link">Editor</a>
+          <a href="#ai-models" class="nv-nav-link">AI Models</a>
+          <a href="#about" class="nv-nav-link">About</a>
+        </div>
+
+        <!-- Desktop Buttons (apare doar pe desktop) -->
+        <div class="hidden md:flex items-center space-x-4">
+          <button class="px-4 py-2 nv-nav-link hover:text-indigo-700">
+            Sign In
+          </button>
+          <button
+            id="themeToggle"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dark-card shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow"
+          >
+            <i
+              class="fas fa-moon text-gray-700 dark:text-yellow-300 hidden dark:block"
+            ></i>
+            <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Buttons  -->
+        <div class="flex md:hidden items-center space-x-3">
+          <button
+            id="themeToggleMobile"
+            class="w-10 h-10 rounded-full bg-white dark:bg-dark-card shadow-lg flex items-center justify-center"
+          >
+            <i
+              class="fas fa-moon text-gray-700 dark:text-yellow-300 hidden dark:block"
+            ></i>
+            <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+          </button>
+          <button
+            id="mobileMenuButton"
+            class="text-gray-600 dark:text-gray-300 p-2 hover:text-indigo-700 transition-colors"
+          >
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="mobile-menu md:hidden bg-white dark:bg-dark-card px-4"
+      >
+        <div class="flex flex-col space-y-3 py-4">
+          <a href="#home" class="nv-nav-link py-2">Home</a>
+          <a href="#features" class="nv-nav-link py-2">Features</a>
+          <a href="#editor" class="nv-nav-link py-2">Editor</a>
+          <a href="#ai-models" class="nv-nav-link py-2">AI Models</a>
+          <a href="#about" class="nv-nav-link py-2">About</a>
+          <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+            <button class="w-full px-4 py-2 nv-nav-link text-left">
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="relative overflow-hidden text-white min-h-[600px] md:h-[700px] flex items-center"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          src="../../img/nexusPhoneBkg.png"
+          alt="Mobile Background"
+          class="w-full h-full object-cover md:hidden"
+          onerror="this.style.display='none'"
+        />
+        <img
+          src="../..//img/nexusBkg.png"
+          alt="Desktop Background"
+          class="w-full h-full object-cover hidden md:block"
+          onerror="this.style.display='none'"
+        />
+        <div class="absolute inset-0 bg-black/60"></div>
+      </div>
+      <div class="container relative z-10 mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Create Stunning Visual Content with AI
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+          Transform images and videos with AI power.
+        </p>
+        <div
+          class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6"
+        >
+          <button
+            class="px-8 py-3 bg-white text-indigo-700 font-semibold rounded-lg hover:bg-gray-100 flex items-center justify-center"
+          >
+            <i class="text-indigo-700 fas fa-play-circle mr-2"></i> Start
+            Creating
+          </button>
+          <button
+            class="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 flex items-center justify-center"
+          >
+            <i class="fas fa-video mr-2"></i> Watch Demo
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white dark:bg-dark-bg">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          AI Editing Tools
+        </h2>
+        <p
+          class="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-16"
+        >
+          Professional visuals in minutes.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-light-card dark:bg-dark-card p-8 rounded-xl card-hover"
+          >
+            <div
+              class="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-magic text-white text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 dark:text-white">
+              Image Enhancement
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+              Improve quality, remove backgrounds, apply styles.
+            </p>
+            <a href="#" class="text-indigo-700 font-medium flex items-center"
+              >Learn More →</a
+            >
+          </div>
+          <div
+            class="bg-light-card dark:bg-dark-card p-8 rounded-xl card-hover"
+          >
+            <div
+              class="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-film text-white text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 dark:text-white">
+              Video Editing
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+              Edit videos, add transitions, apply filters.
+            </p>
+            <a href="#" class="text-indigo-700 font-medium flex items-center"
+              >Learn More →</a
+            >
+          </div>
+          <div
+            class="bg-light-card dark:bg-dark-card p-8 rounded-xl card-hover"
+          >
+            <div
+              class="w-14 h-14 rounded-full gradient-bg flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-brain text-white text-xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 dark:text-white">
+              Content Generation
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+              Create new images and videos from text.
+            </p>
+            <a href="#" class="text-indigo-700 font-medium flex items-center"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editor Section -->
+    <section
+      id="editor"
+      class="py-20 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20"
+    >
+      <div class="container mx-auto px-4">
+        <!-- Solo Editor Panel -->
+        <div
+          class="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-2xl shadow-xl p-6 md:p-8 mb-16"
+        >
+          <div class="flex space-x-2 mb-6">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+
+          <!-- Tabs -->
+          <div
+            class="flex border-b border-gray-200 dark:border-gray-700 mb-8 overflow-x-auto"
+          >
+            <button
+              class="tab-btn py-3 px-5 font-medium tab-active rounded-t-lg min-w-[80px]"
+              data-tab="edit"
+            >
+              Edit
+            </button>
+            <button
+              class="tab-btn py-3 px-5 font-medium text-gray-600 dark:text-gray-300 min-w-[80px]"
+              data-tab="filters"
+            >
+              Filters
+            </button>
+            <button
+              class="tab-btn py-3 px-5 font-medium text-gray-600 dark:text-gray-300 min-w-[80px]"
+              data-tab="ai"
+            >
+              AI Tools
+            </button>
+            <button
+              class="tab-btn py-3 px-5 font-medium text-gray-600 dark:text-gray-300 min-w-[80px]"
+              data-tab="export"
+            >
+              Export
+            </button>
+          </div>
+
+          <!-- Tab Content -->
+          <div class="mb-8">
+            <div class="tab-content active" id="edit-tab">
+              <div
+                class="bg-gray-100 dark:bg-gray-800 h-64 md:h-72 rounded-lg flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-image text-gray-400 dark:text-gray-500 text-5xl"
+                ></i>
+              </div>
+              <div
+                class="mt-4 bg-white dark:bg-dark-card rounded-lg p-4 shadow"
+              >
+                <div class="flex justify-between items-center">
+                  <span class="font-medium dark:text-white"
+                    >Enhance with AI</span
+                  >
+                  <button
+                    class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content hidden" id="filters-tab">
+              <div
+                class="bg-gray-100 dark:bg-gray-800 h-64 md:h-72 rounded-lg flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-sliders-h text-gray-400 dark:text-gray-500 text-5xl"
+                ></i>
+              </div>
+            </div>
+
+            <div class="tab-content hidden" id="ai-tab">
+              <div
+                class="bg-gray-100 dark:bg-gray-800 h-64 md:h-72 rounded-lg flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-robot text-gray-400 dark:text-gray-500 text-5xl"
+                ></i>
+              </div>
+            </div>
+
+            <div class="tab-content hidden" id="export-tab">
+              <div
+                class="bg-gray-100 dark:bg-gray-800 h-64 md:h-72 rounded-lg flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-download text-gray-400 dark:text-gray-500 text-5xl"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div
+              class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 text-center cursor-pointer hover:scale-105 transition-transform"
+            >
+              <i class="fas fa-sun text-yellow-500 text-xl mb-2"></i>
+              <p class="text-sm font-medium dark:text-gray-300">Brighten</p>
+            </div>
+            <div
+              class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 text-center cursor-pointer hover:scale-105 transition-transform"
+            >
+              <i class="fas fa-crop-alt text-green-500 text-xl mb-2"></i>
+              <p class="text-sm font-medium dark:text-gray-300">Crop</p>
+            </div>
+            <div
+              class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 text-center cursor-pointer hover:scale-105 transition-transform"
+            >
+              <i class="fas fa-adjust text-purple-500 text-xl mb-2"></i>
+              <p class="text-sm font-medium dark:text-gray-300">Filter</p>
+            </div>
+            <div
+              class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 text-center cursor-pointer hover:scale-105 transition-transform"
+            >
+              <i class="fas fa-robot text-indigo-700 text-xl mb-2"></i>
+              <p class="text-sm font-medium dark:text-gray-300">AI Magic</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Below Editor -->
+        <div class="max-w-3xl mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-4 dark:text-white text-center"
+          >
+            AI-Powered Editor
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-8 text-center">
+            Professional editing made simple.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div
+                class="w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-1 mr-4 flex-shrink-0"
+              >
+                <i class="fas fa-bolt text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1 dark:text-white">
+                  One-Click Enhance
+                </h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                  Auto-improve lighting and colors.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-1 mr-4 flex-shrink-0"
+              >
+                <i class="fas fa-paint-brush text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1 dark:text-white">
+                  Style Transfer
+                </h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                  Apply artistic styles instantly.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="w-8 h-8 rounded-full bg-primary flex items-center justify-center mt-1 mr-4 flex-shrink-0"
+              >
+                <i class="fas fa-eraser text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1 dark:text-white">
+                  Object Removal
+                </h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                  Remove unwanted objects easily.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Models Section -->
+    <section id="ai-models" class="py-20 bg-white dark:bg-dark-bg">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          AI Models
+        </h2>
+        <p
+          class="text-gray-600 dark:text-gray-300 text-center max-w-2xl mx-auto mb-16"
+        >
+          State-of-the-art AI technology.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="bg-light-card dark:bg-dark-card rounded-xl overflow-hidden card-hover"
+          >
+            <div class="h-48 gradient-bg flex items-center justify-center">
+              <i class="fas fa-palette text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 dark:text-white">StyleGAN3</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Generate high-quality images from text.
+              </p>
+              <div
+                class="flex items-center text-sm text-gray-500 dark:text-gray-400"
+              >
+                <i class="fas fa-bolt mr-2 text-yellow-500"></i>
+                <span>Fast Generation</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-light-card dark:bg-dark-card rounded-xl overflow-hidden card-hover"
+          >
+            <div class="h-48 gradient-bg flex items-center justify-center">
+              <i class="fas fa-exchange-alt text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 dark:text-white">
+                Stable Diffusion
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Create images with natural language.
+              </p>
+              <div
+                class="flex items-center text-sm text-gray-500 dark:text-gray-400"
+              >
+                <i class="fas fa-shield-alt mr-2 text-green-500"></i>
+                <span>Safe Content</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-light-card dark:bg-dark-card rounded-xl overflow-hidden card-hover"
+          >
+            <div class="h-48 gradient-bg flex items-center justify-center">
+              <i class="fas fa-video text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 dark:text-white">Runway ML</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Advanced video editing for professionals.
+              </p>
+              <div
+                class="flex items-center text-sm text-gray-500 dark:text-gray-400"
+              >
+                <i class="fas fa-film mr-2 text-purple-500"></i>
+                <span>Video Focused</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-light-card dark:bg-dark-card rounded-xl overflow-hidden card-hover"
+          >
+            <div class="h-48 gradient-bg flex items-center justify-center">
+              <i class="fas fa-magic text-white text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-2 dark:text-white">DALL-E 2</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Create realistic images from text.
+              </p>
+              <div
+                class="flex items-center text-sm text-gray-500 dark:text-gray-400"
+              >
+                <i class="fas fa-paint-brush mr-2 text-blue-500"></i>
+                <span>Artistic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Ready to Transform Your Content?
+        </h2>
+        <p class="text-xl mb-10 max-w-2xl mx-auto">
+          Join creators using Nexus Vision.
+        </p>
+        <div class="max-w-md mx-auto bg-white/10 rounded-xl p-8">
+          <h3 class="text-2xl font-bold mb-4">Start Creating Today</h3>
+          <p class="mb-6">Get 10 free AI generations</p>
+          <div class="space-y-4">
+            <input
+              type="email"
+              placeholder="Your email"
+              class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70"
+            />
+            <button
+              class="w-full px-4 py-3 bg-white text-indigo-700 font-semibold rounded-lg hover:bg-gray-100"
+            >
+              Get Started
+            </button>
+          </div>
+          <p class="text-sm mt-4 text-white/70">No credit card required.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about" class="bg-dark text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center space-x-2 mb-6">
+              <div
+                class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center"
+              >
+                <i class="fas fa-eye text-white text-sm"></i>
+              </div>
+              <span
+                class="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              >
+                Nexus Vision
+              </span>
+            </div>
+            <p class="text-gray-400">AI-powered editing for creators.</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-6 text-blue-400">Product</h4>
+            <ul class="space-y-3 text-gray-400">
+              <li>
+                <a href="#features" class="hover:text-indigo-700">Features</a>
+              </li>
+              <li>
+                <a href="#editor" class="hover:text-indigo-700">Editor</a>
+              </li>
+              <li>
+                <a href="#ai-models" class="hover:text-indigo-700">AI Models</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-6 text-blue-400">Resources</h4>
+            <ul class="space-y-3 text-gray-400">
+              <li><a href="#" class="hover:text-indigo-700">Blog</a></li>
+              <li><a href="#" class="hover:text-indigo-700">Tutorials</a></li>
+              <li><a href="#" class="hover:text-indigo-700">Docs</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-6 text-blue-400">Company</h4>
+            <ul class="space-y-3 text-gray-400">
+              <li><a href="#about" class="hover:text-indigo-700">About</a></li>
+              <li><a href="#" class="hover:text-indigo-700">Contact</a></li>
+              <li><a href="#" class="hover:text-indigo-700">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400 mb-4 md:mb-0">© 2026 Nexus Vision.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-indigo-700"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-indigo-700"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-indigo-700"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu
+      const mobileMenuButton = document.getElementById("mobileMenuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
+        mobileMenuButton.innerHTML = mobileMenu.classList.contains("open")
+          ? '<i class="fas fa-times text-xl"></i>'
+          : '<i class="fas fa-bars text-xl"></i>';
+      });
+
+      // Tab Switching
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tabId = btn.dataset.tab;
+
+          // Update tabs
+          document.querySelectorAll(".tab-btn").forEach((b) => {
+            b.classList.remove("tab-active");
+            b.classList.add("text-gray-600", "dark:text-gray-300");
+          });
+          btn.classList.add("tab-active");
+          btn.classList.remove("text-gray-600", "dark:text-gray-300");
+
+          // Update content
+          document.querySelectorAll(".tab-content").forEach((content) => {
+            content.classList.add("hidden");
+            content.classList.remove("active");
+          });
+          document.getElementById(`${tabId}-tab`).classList.remove("hidden");
+          document.getElementById(`${tabId}-tab`).classList.add("active");
+        });
+      });
+
+      // Theme Toggle Function
+      function toggleTheme() {
+        document.documentElement.classList.toggle("dark");
+        localStorage.setItem(
+          "theme",
+          document.documentElement.classList.contains("dark") ? "dark" : "light"
+        );
+      }
+
+      // Theme Toggle for Desktop
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", toggleTheme);
+
+      // Theme Toggle for Mobile
+      document
+        .getElementById("themeToggleMobile")
+        .addEventListener("click", toggleTheme);
+
+      // Load saved theme
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const target = document.querySelector(targetId);
+          if (target) {
+            // Close mobile menu
+            mobileMenu.classList.remove("open");
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
